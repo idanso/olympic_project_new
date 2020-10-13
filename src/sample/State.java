@@ -5,20 +5,35 @@ import java.util.ArrayList;
 public class State {
     private String name;
     private ArrayList<FinalPlaces> finalPlaceAtTheTournament;
-    private ArrayList<Person> RunningTeam;
-    private ArrayList<Person> JumpingTeam;
+    private ArrayList<Person> athletes;
     public enum FinalPlaces {
         FirstPlace3Points,
         SecondPlace2Points,
         ThirdPlace1Points
     }
-
-    public State(String name, ArrayList RunningTeam, ArrayList JumpingTeam){
-        this.RunningTeam = new ArrayList<Person>();
-        this.JumpingTeam = new  ArrayList<Person>();
+    public State (String name){
+        setName(name);
+    }
+    public State(String name, ArrayList athlets){
+        setName(name);
+        setAthletes(athlets);
         finalPlaceAtTheTournament = new ArrayList<FinalPlaces>();
     }
 
+    public ArrayList getAllTheRunners(ArrayList <Person> athletes){
+        ArrayList <Person> allTheRunners = new ArrayList<Person>();
+        for(int i =0 ; i< athletes.size() ; i++) {
+            if(athletes.get(i).getSportType().equals("Runner") || athletes.get(i).getSportType().equals("RunnerANDJumper")) allTheRunners.add(athletes.get(i));
+        }
+        return allTheRunners;
+    }
+    public ArrayList getAllTheJumpers(ArrayList <Person> athletes){
+        ArrayList <Person> allTheJumpers = new ArrayList<Person>();
+        for(int i =0 ; i< athletes.size() ; i++) {
+            if(athletes.get(i).getSportType().equals("Jumper") || athletes.get(i).getSportType().equals("RunnerANDJumper")) allTheJumpers.add(athletes.get(i));
+        }
+        return allTheJumpers;
+    }
     public void addPlayer(ArrayList list, Person athlete){
         list.add(athlete);
     }
@@ -49,12 +64,19 @@ public class State {
         return name;
     }
 
+    public void setAthletes(ArrayList<Person> athletes) {
+        this.athletes = athletes;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "State{" +
                 "Name='" + name + '\'' +
-                ", The running team=" + RunningTeam +
-                ", The jumping team=" + JumpingTeam +
+                ", The running team=" + getAllTheRunners(athletes) +
+                ", The jumping team=" + getAllTheJumpers(athletes) +
                 '}';
     }
 }

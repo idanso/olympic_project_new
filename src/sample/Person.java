@@ -5,8 +5,8 @@ public abstract class Person {
     protected State StateName;
 
     public Person(String name, State StateName){
-        this.name = name;
-        this.StateName=StateName;
+        setName(name);
+        setStateName(StateName);
     }
 
     public String getName(){
@@ -17,4 +17,11 @@ public abstract class Person {
     }
     public abstract SportTypeAthleteANDReferee getSportType();
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStateName(State stateName) {
+        StateName = stateName;
+    }
 }

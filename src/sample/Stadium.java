@@ -4,9 +4,9 @@ public class Stadium {
     private String location;
     private int numberOfSeats;
     public Stadium (String name, String location, int numberOfSeats){
-        this.name = name;
-        this.location = location;
-        this.numberOfSeats = numberOfSeats;
+        setName(name);
+        setLocation(location);
+        setNumberOfSeats(numberOfSeats);
     }
 
     public String getName() {
