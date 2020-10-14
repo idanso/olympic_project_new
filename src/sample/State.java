@@ -4,20 +4,17 @@ import java.util.ArrayList;
 
 public class State {
     private String name;
-    private ArrayList<FinalPlaces> finalPlaceAtTheTournament;
+    private ArrayList<Integer> finalPlaceAtTheTournament;
     private ArrayList<Person> athletes;
-    public enum FinalPlaces {
-        FirstPlace3Points,
-        SecondPlace2Points,
-        ThirdPlace1Points
-    }
+
     public State (String name){
         setName(name);
+        finalPlaceAtTheTournament = new ArrayList<Integer>();
     }
     public State(String name, ArrayList athlets){
         setName(name);
         setAthletes(athlets);
-        finalPlaceAtTheTournament = new ArrayList<FinalPlaces>();
+        finalPlaceAtTheTournament = new ArrayList<Integer>();
     }
 
     public ArrayList getAllTheRunners(ArrayList <Person> athletes){
@@ -34,6 +31,11 @@ public class State {
         }
         return allTheJumpers;
     }
+
+    public void addMedal(int place) {//מוסיף מדלייה לאוסף של המדינה
+        this.finalPlaceAtTheTournament.add(place);
+    }
+
     public void addPlayer(ArrayList list, Person athlete){
         list.add(athlete);
     }
@@ -52,9 +54,9 @@ public class State {
     public int getTotalPoints(){
         int totalPoints = 0;
         for(int i =0 ; i< finalPlaceAtTheTournament.size() ; i++){
-            if(finalPlaceAtTheTournament.get(i).name().equalsIgnoreCase("FirstPlace3Points")) totalPoints =+3;
+            if(finalPlaceAtTheTournament.get(i) == 1) totalPoints =+3;
             else {
-                if (finalPlaceAtTheTournament.get(i).name().equalsIgnoreCase("SecondPlace2Points")) totalPoints =+ 2;
+                if (finalPlaceAtTheTournament.get(i) == 2) totalPoints =+ 2;
                 else totalPoints =+ 1;
             }
         }
@@ -70,6 +72,12 @@ public class State {
     public void setName(String name) {
         this.name = name;
     }
+
+    public ArrayList<Integer> getFinalPlaceAtTheTournament() {
+        return finalPlaceAtTheTournament;
+    }
+
+
 
     @Override
     public String toString() {
