@@ -1,6 +1,7 @@
 package sample;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Tournament <T>{
     private T t;//הטייפ שאנחנו מקבלים
@@ -20,6 +21,18 @@ public class Tournament <T>{
     public void addToTournament(T t){
         if(t instanceof State) allTeams.add((State) t);
         else if(t instanceof  Person) allAthletes.add((Person) t);
+    }
+
+    public ArrayList<T> getPodium (ArrayList <T> list){ //מחזיר מערך של 3 המקומות הראשונים מהתחרות, כשהראשון הוא מקום ראשון
+        ArrayList <T> copyArray = new ArrayList<T>(list);//העתק של המערך שמקבלים
+        Random randomNumber = new Random();
+        ArrayList <T> podiumArray = new ArrayList<T>();
+        for (int i=1 ; i<=3 ; i++) {
+            int number = randomNumber.nextInt(copyArray.size());
+            podiumArray.add(list.get(number));
+            copyArray.remove(number);//מוחק את מי שנבחר בהגרלה מהמערך הרזרבי שיצרתי בהתחלה ןלא מהמקורי
+        }
+        return podiumArray;
     }
 
 
