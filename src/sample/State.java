@@ -5,11 +5,12 @@ import java.util.ArrayList;
 public class State {
     private String name;
     private ArrayList<Integer> finalPlaceAtTheTournament;
-    private ArrayList<Person> athletes;
+    private ArrayList<Athlete> athletes;
 
     public State (String name){
         setName(name);
         finalPlaceAtTheTournament = new ArrayList<Integer>();
+        athletes = new ArrayList<>();
     }
     public State(String name, ArrayList athlets){
         setName(name);
@@ -17,17 +18,19 @@ public class State {
         finalPlaceAtTheTournament = new ArrayList<Integer>();
     }
 
-    public ArrayList getAllTheRunners(ArrayList <Person> athletes){
-        ArrayList <Person> allTheRunners = new ArrayList<Person>();
+    public ArrayList getAllTheRunners(){
+        ArrayList <Athlete> allTheRunners = new ArrayList<Athlete>();
         for(int i =0 ; i< athletes.size() ; i++) {
-            if(athletes.get(i).getSportType().equals("Runner") || athletes.get(i).getSportType().equals("RunnerANDJumper")) allTheRunners.add(athletes.get(i));
+            if(athletes.get(i).getSportType().equals("Runner") || athletes.get(i).getSportType().equals("RunnerANDJumper"))
+                allTheRunners.add(athletes.get(i));
         }
         return allTheRunners;
     }
-    public ArrayList getAllTheJumpers(ArrayList <Person> athletes){
-        ArrayList <Person> allTheJumpers = new ArrayList<Person>();
+    public ArrayList getAllTheJumpers(){
+        ArrayList <Athlete> allTheJumpers = new ArrayList<Athlete>();
         for(int i =0 ; i< athletes.size() ; i++) {
-            if(athletes.get(i).getSportType().equals("Jumper") || athletes.get(i).getSportType().equals("RunnerANDJumper")) allTheJumpers.add(athletes.get(i));
+            if(athletes.get(i).getSportType().equals("Jumper") || athletes.get(i).getSportType().equals("RunnerANDJumper"))
+                allTheJumpers.add(athletes.get(i));
         }
         return allTheJumpers;
     }
@@ -36,13 +39,13 @@ public class State {
         this.finalPlaceAtTheTournament.add(place);
     }
 
-    public void addPlayer(ArrayList list, Person athlete){
-        list.add(athlete);
+    public void addPlayer(Athlete athlete){
+        athletes.add(athlete);
     }
-    public void deletePlayer(ArrayList list, Person athlete){
-        for (int i=0 ; i<list.size() ; i++) {
-            if(list.get(i).equals(athlete))
-            list.remove(i);
+    public void deletePlayer(String name){
+        for (int i=0 ; i<athletes.size() ; i++) {
+            if(athletes.get(i).getName().equals(name))
+            athletes.remove(i);
         }
     }
     public void updatePlayer(ArrayList list, Person athleteToRemove, Person athleteToAdd){
@@ -66,7 +69,16 @@ public class State {
         return name;
     }
 
-    public void setAthletes(ArrayList<Person> athletes) {
+    public Athlete getAthleteByName(String name){
+        for(Athlete i : athletes){
+            if(i.getName().equals(name))
+                return i;
+
+        }
+        return null;
+    }
+
+    public void setAthletes(ArrayList<Athlete> athletes) {
         this.athletes = athletes;
     }
     public void setName(String name) {
@@ -83,8 +95,8 @@ public class State {
     public String toString() {
         return "State{" +
                 "Name='" + name + '\'' +
-                ", The running team=" + getAllTheRunners(athletes) +
-                ", The jumping team=" + getAllTheJumpers(athletes) +
+                ", The running team=" + getAllTheRunners() +
+                ", The jumping team=" + getAllTheJumpers() +
                 '}';
     }
 }

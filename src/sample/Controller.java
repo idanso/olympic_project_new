@@ -3,22 +3,21 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
-import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
-import javafx.stage.Stage;
 
 public class Controller implements Initializable {
+
+    Model model = new Model();
 
     @FXML
     private Button changeTomanagerPage;
@@ -175,43 +174,54 @@ public class Controller implements Initializable {
     public void menuButtonEvent (String tornamentType){
         //  tournamentTypeCol.setCellValueFactory(new PropertyValueFactory<>());
     }
+
+    public void addItemsToMenu(){
+        countryBox.getItems().clear();
+        countryBox.getItems().addAll(model.getAllStateString());
+        countryBox1.getItems().clear();
+        countryBox1.getItems().addAll(model.getAllStateString());
+        ArrayList <MenuItem> menulistArray = new ArrayList<>();
+        countryMenu.getItems().clear();
+        for (String i : model.getAllStateString()) {
+            menulistArray.add(new MenuItem(i));
+        }
+        countryMenu.getItems().addAll(menulistArray);
+        menulistArray.clear();
+//        for (String i : model.getAllTournamentsString()) {
+//            menulistArray.add(new MenuItem(i));
+//        }
+//        tournamentMenu.getItems().addAll(menulistArray);
+    }
     public void editAthleteBtnsEvent (ActionEvent e) {
         String fullName;
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        boolean actionStatus = false;//to change if needed
         alert.setTitle("status massage");
         try {
             if (e.getSource() == athleteSubmitBtn) {
                 fullName = fullNameRegisterInput.getText();
                 SportTypeAthleteANDReferee sportType = (SportTypeAthleteANDReferee)sportTypeBox.getValue();
                 String country = countryInput.getText();
-                if (fullName != null && sportType != null && country != null) {
-                    //**********send to delete player function*************
-                    // boolean = (retunr if player added or not) need to send to th add athlete function
-                    if (actionStatus)
-                        alert.setHeaderText("Athlete added successfully!");
-                    else
-                        alert.setHeaderText("something went wrong, athlete didn't added");
-                    alert.showAndWait();
+                if (!fullName.isEmpty() && sportType != null && country != null) {
+                    dialogMassage(model.addAthlete(fullName,country,sportType));
+                    addItemsToMenu();
+                    fullNameRegisterInput.clear();
+                    sportTypeBox.getSelectionModel().clearSelection();
+                    countryInput.clear();
                 } else
-                    emptyFieldsDialog();
+                    dialogMassage(eDialogMassage.EMPTY);
+
             } else if (e.getSource() == athleteDeleteBtn) {
                 fullName = fullNameDeleteInput.getText();
-                if (fullNameDeleteInput != null) {
-                    //**********send to delete player function*************
-                    if (actionStatus)
-                        alert.setHeaderText("Athlete delete sucesfully!");
-                    else
-                        alert.setHeaderText("somthing went wrong, athlete didn't delete");
-                    alert.showAndWait();
+                System.out.println(fullName);
+                if (!fullName.isEmpty()) {
+                    dialogMassage(model.deleteAthlete(fullName));
+                    fullNameDeleteInput.clear();
                 }
                 else
-                    emptyFieldsDialog();
+                    dialogMassage(eDialogMassage.EMPTY);
             }
         } catch (Exception e1){
-            alert.setHeaderText("somthing went wrong, try again and fill all " +
-                    "fields");
-            alert.showAndWait();
+            dialogMassage(eDialogMassage.FAILED);
         }
     }
 
@@ -232,8 +242,8 @@ public class Controller implements Initializable {
             stadiumSeatsInput.clear();
 
         }
-        if (name != null && location != null && numOfSeats != 0){
-            //************to fill function to add stadium to system*************
+        if (!name.isEmpty() && !location.isEmpty() && numOfSeats != 0){
+            dialogMassage(model.addstadium(name,location,numOfSeats));
             stadiumSeatsInput.clear();
             stadiumLocationInput.clear();
             stadiumNameInput.clear();
@@ -242,7 +252,7 @@ public class Controller implements Initializable {
             stadiumSeatsInput.clear();
             stadiumLocationInput.clear();
             stadiumNameInput.clear();
-            emptyFieldsDialog();
+            dialogMassage(eDialogMassage.EMPTY);
         }
 
     }
@@ -253,10 +263,10 @@ public class Controller implements Initializable {
         if(sportType != null && strTournamentType != null){
             refereeBox.getItems().clear();
             refereeBox.getItems().addAll();//need to add the array of all matching referees
-            if (countryBox != null){
+            if (countryBox.getSelectionModel() != null){
                 athleteBox1.getItems().addAll();////need to add the array of all matching referees
             }
-            if (countryBox1 != null){
+            if (countryBox1.getSelectionModel() != null){
                 athleteBox2.getItems().addAll();////need to add the array of all matching referees
             }
         }
@@ -265,14 +275,14 @@ public class Controller implements Initializable {
         String name = refereeFullNameInput1.getText();
         String country = refereeCountryInput.getText();
         SportTypeAthleteANDReferee sportType = sportTypeBox2.getValue();
-        if (name != null && country != null && sportType != null ){
-
+        if (!name.isEmpty() && !country.isEmpty() && sportType != null ){
+            dialogMassage(model.addReferee(name, country, sportType));
+            addItemsToMenu();
         }
         else{
-
+            dialogMassage(eDialogMassage.EMPTY);
         }
     }
-
 
 
     @Override
@@ -292,26 +302,32 @@ public class Controller implements Initializable {
             });
         }
         tournamentMenu.getItems().addAll(menulistArray);
-
-        for (int i = 0; i < 5; i++) {
-            menulistArray.add(new MenuItem("country num " + (i+1)));//need to add refference to all countrys array
-        }
-        countryMenu.getItems().addAll(menulistArray);
+        addItemsToMenu();
         tournamentType.getItems().addAll("solo", "group");
         sportTypeBox.getItems().addAll(SportTypeAthleteANDReferee.values());
         sportTypeBox1.getItems().addAll(SportTypeAthleteANDReferee.getAllSportTypes());
         sportTypeBox2.getItems().addAll(SportTypeAthleteANDReferee.values());
         stadiumBox.getItems().addAll();//need to add the array of all stadiums
-        countryBox.getItems().addAll();//need to add the array of all countrys
-        countryBox1.getItems().addAll();//need to add the array of all countrys
+        countryBox.getItems().addAll(model.getAllStateString());//need to add the array of all countrys
+        countryBox1.getItems().addAll(model.getAllStateString());//need to add the array of all countrys
 
     }
 
-    public void emptyFieldsDialog (){
+
+    public void dialogMassage(eDialogMassage massage ){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("status massage");
-        alert.setHeaderText("please fill all the fields correctly");
+        if (massage == eDialogMassage.EMPTY)
+            alert.setHeaderText("please fill all the fields correctly");
+        else if (massage == eDialogMassage.FAILED)
+            alert.setHeaderText("somthing went wrong, try again and fill all fields");
+        else if (massage == eDialogMassage.SUCCESS)
+            alert.setHeaderText("added success!");
+        else if(massage == eDialogMassage.IN_SYSTEM)
+            alert.setHeaderText("not added, already exist in the system");
         alert.showAndWait();
+
     }
+    
 
 }
