@@ -1,19 +1,20 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
-import java.lang.reflect.Array;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.ResourceBundle;
-
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
@@ -32,7 +33,7 @@ public class Controller implements Initializable {
     private MenuButton tournamentMenu;
 
     @FXML
-    private TableView<?> rournamentsTableView;
+    private TableView<?> tournamentsTableView;
 
     @FXML
     private TableColumn<?, ?> tournamentTypeCol;
@@ -50,19 +51,19 @@ public class Controller implements Initializable {
     private Tab viewAthletesTap;
 
     @FXML
-    private MenuButton countryMenu;
+    private ChoiceBox<String> countryBox2;
 
     @FXML
-    private TableView<?> athletesTableView;
+    private TableView<Athlete> athletesTableView;
 
     @FXML
-    private TableColumn<?, ?> athlleteNameCol;
+    private TableColumn<Athlete, String> athlleteNameCol;
 
     @FXML
-    private TableColumn<?, ?> athleteMedalsCol;
+    private TableColumn<Athlete, String> athleteCountryCol;
 
     @FXML
-    private TableColumn<?, ?> athleteTypecol;
+    private TableColumn<Athlete, SportTypeAthleteANDReferee> athleteTypecol;
 
     @FXML
     private Tab viewMedalsTab;
@@ -172,7 +173,16 @@ public class Controller implements Initializable {
     @FXML
     private Label country1RedLabel;
 
+    public ObservableList<Athlete> athletelist = FXCollections.observableArrayList();
 
+    public void athleteTableViewUpdate(String country){
+        athletesTableView.getItems().clear();
+        System.out.println(country);
+        athletelist.addAll(model.getStateByName(country).getAthletes());
+        athlleteNameCol.setCellValueFactory(new PropertyValueFactory<Athlete, String>("name"));
+        athleteTypecol.setCellValueFactory(new PropertyValueFactory<Athlete,SportTypeAthleteANDReferee>("sportType"));
+        athletesTableView.setItems(athletelist);
+    }
     /*public void sceneSwitchEvent (ActionEvent event) throws IOException {
         Parent root;
         Stage stage;
@@ -183,28 +193,15 @@ public class Controller implements Initializable {
         stage.show();
     }*/
 
-    public void menuButtonEvent (String tornamentType){
-        //  tournamentTypeCol.setCellValueFactory(new PropertyValueFactory<>());
-    }
-
     public void addItemsToMenu(){
         countryBox.getItems().clear();
         countryBox.getItems().addAll(model.getAllStateString());
         countryBox1.getItems().clear();
         countryBox1.getItems().addAll(model.getAllStateString());
-        ArrayList <MenuItem> menulistArray = new ArrayList<>();
-        countryMenu.getItems().clear();
-        for (String i : model.getAllStateString()) {
-            menulistArray.add(new MenuItem(i));
-        }
-        countryMenu.getItems().addAll(menulistArray);
-        menulistArray.clear();
-
-//        for (String i : model.getAllTournamentsString()) {
-//            menulistArray.add(new MenuItem(i));
-//        }
-//        tournamentMenu.getItems().addAll(menulistArray);
+        countryBox2.getItems().clear();
+        countryBox2.getItems().addAll(model.getAllStateString());
     }
+
     public void editAthleteBtnsEvent (ActionEvent e) {
         String fullName;
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -354,6 +351,7 @@ public class Controller implements Initializable {
             }
         }
     }
+
     public void addRefereeBtn (ActionEvent e){
         String name = refereeFullNameInput1.getText();
         String country = refereeCountryInput.getText();
@@ -371,19 +369,6 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList <MenuItem> menulistArray = new ArrayList<>();
-//        for (int i = 0; i < 5; i++) {
-//            menulistArray.add(new MenuItem("tournament type num" + (i+1)));//need to add refference to all tournament types array
-//            menulistArray.get(i).setId("type" + i);
-//
-//            menulistArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
-//                @Override
-//                public void handle(ActionEvent event) {
-//                    System.out.println(((MenuItem)event.getSource()).getId());
-//                    System.out.println(((MenuItem)event.getSource()).getText());
-//                    menuButtonEvent(((MenuItem)event.getSource()).getText());
-//                }
-//            });
-//        }
         tournamentMenu.getItems().addAll(menulistArray);
         addItemsToMenu();
         tournamentType.getItems().addAll("solo", "group");
@@ -393,6 +378,13 @@ public class Controller implements Initializable {
         stadiumBox.getItems().addAll(model.getStadiumString());
         countryBox.getItems().addAll(model.getAllStateString());
         countryBox1.getItems().addAll(model.getAllStateString());
+        countryBox2.getItems().addAll(model.getAllStateString());
+        countryBox2.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                athleteTableViewUpdate(countryBox2.getItems().get((Integer)t1));
+            }
+        });
 
     }
 

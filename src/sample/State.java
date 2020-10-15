@@ -18,6 +18,10 @@ public class State {
         finalPlaceAtTheTournament = new ArrayList<Integer>();
     }
 
+    public ArrayList<Athlete> getAthletes() {
+        return athletes;
+    }
+
     public ArrayList getAllTheRunners(){
         ArrayList <Athlete> allTheRunners = new ArrayList<Athlete>();
         for(int i =0 ; i< athletes.size() ; i++) {
@@ -93,10 +97,10 @@ public class State {
 
     @Override
     public String toString() {
-        return "State{" +
-                "Name='" + name + '\'' +
-                ", The running team=" + getAllTheRunners() +
-                ", The jumping team=" + getAllTheJumpers() +
-                '}';
+        return "State{"; // +
+             //   "Name='" + name + '\'' +
+               // ", The running team=" + getAllTheRunners() +
+               // ", The jumping team=" + getAllTheJumpers() +
+                //'}';
     }
 }
