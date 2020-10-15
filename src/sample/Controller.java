@@ -160,6 +160,18 @@ public class Controller implements Initializable {
     @FXML
     private TextField refereeCountryInput;
 
+    @FXML
+    private Label tournamentRedLabel;
+
+    @FXML
+    private Label sportTypeRedLabel;
+
+    @FXML
+    private Label countryRedLabel;
+
+    @FXML
+    private Label country1RedLabel;
+
 
     /*public void sceneSwitchEvent (ActionEvent event) throws IOException {
         Parent root;
@@ -259,6 +271,44 @@ public class Controller implements Initializable {
         }
 
     }
+    public void emptyFieldsRedMassage(MouseEvent e){
+        String str1TournamentType = tournamentType.getValue();
+        SportTypeAthleteANDReferee sportType1 = sportTypeBox1.getValue();
+        if(sportType1 == null) {
+            sportTypeRedLabel.setText("required field first");
+            sportTypeRedLabel.setTextFill(Paint.valueOf("red"));
+        }
+        if (str1TournamentType == null){
+            tournamentRedLabel.setText("required field first");
+            tournamentRedLabel.setTextFill(Paint.valueOf("red"));
+        }
+        if(e.getSource().equals(athleteBox1) && countryBox.getValue() == null){
+            countryRedLabel.setText("required field first");
+            countryRedLabel.setTextFill(Paint.valueOf("red"));
+        }
+        if(e.getSource().equals(athleteBox2) && countryBox1.getValue() == null){
+            country1RedLabel.setText("required field first");
+            country1RedLabel.setTextFill(Paint.valueOf("red"));
+        }
+
+    }
+    public void addTournamenBtn(ActionEvent e){
+        String strTournamentType = tournamentType.getValue();
+        SportTypeAthleteANDReferee sportType = sportTypeBox1.getValue();
+        String country = countryBox.getValue();
+        String country1 = countryBox1.getValue();
+        String athlete1 = athleteBox1.getValue();
+        String athlete2 = athleteBox1.getValue();
+        String referee = refereeBox.getValue();
+        String stadium = stadiumBox.getValue();
+        if (!strTournamentType.equals(null) && !sportType.equals(null) && !country.equals(null) &&
+                !country1.equals(null) && !athlete1.equals(null) && !athlete2.equals(null) &&
+                !referee.equals(null) && !stadium.equals(null)){
+            //need to add reference to build tournament
+        }
+        else
+            dialogMassage(eDialogMassage.EMPTY);
+    }
 
     public void tornamenBoxFill (ActionEvent e){
         if (e.getSource().equals(tournamentType) || e.getSource().equals(sportTypeBox1)){
@@ -270,16 +320,37 @@ public class Controller implements Initializable {
         }
         String strTournamentType = tournamentType.getValue();
         SportTypeAthleteANDReferee sportType = sportTypeBox1.getValue();
+        if (sportType != null)
+            sportTypeRedLabel.setText("");
+        if (strTournamentType != null)
+            tournamentRedLabel.setText("");
         if(sportType != null && strTournamentType != null){
             refereeBox.getItems().clear();
             refereeBox.getItems().addAll(model.getRefereesBySportTypeString(sportType));
             String country = countryBox.getValue();
             String country1 = countryBox1.getValue();
-            if (country != null){
-                athleteBox1.getItems().addAll(model.getAthletesByCountryAndSportType(country,sportType));////need to add the array of all matching Athletes
+            if (tournamentType.getValue().equals("group")) {
+                athleteBox1.getItems().clear();
+                athleteBox1.getItems().add("The team");
+                athleteBox2.getItems().clear();
+                athleteBox2.getItems().add("The team");
             }
-            if (country1 != null){
-                athleteBox2.getItems().addAll(model.getAthletesByCountryAndSportType(country1,sportType));////need to add the array of all matching referees
+            else {
+                if (country != null) {
+                    countryRedLabel.setText("");
+                    if (e.getSource().equals(countryBox)) {
+                        athleteBox1.getItems().clear();
+                        athleteBox1.getItems().addAll(model.getAthletesByCountryAndSportType(country, sportType));
+                    }
+                }
+                if (country1 != null) {
+                    country1RedLabel.setText("");
+                    if (e.getSource().equals(countryBox1)) {
+                        athleteBox2.getItems().clear();
+                        athleteBox2.getItems().addAll(model.getAthletesByCountryAndSportType(country1, sportType));
+                    }
+                }
+
             }
         }
     }

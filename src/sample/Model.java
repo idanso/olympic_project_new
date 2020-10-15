@@ -7,6 +7,7 @@ public class Model {
     private ArrayList<State> allStates = new ArrayList<>();
     private ArrayList<Stadium> allStadiums = new ArrayList<>();
     private ArrayList<Referee> allReferees = new ArrayList<>();
+    //need to add Array of tournaments
 
     public eDialogMassage addstadium(String name, String location, int numberOfSeats){
         for (Stadium i : allStadiums){

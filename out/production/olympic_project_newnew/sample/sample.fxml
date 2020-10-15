@@ -135,7 +135,7 @@
                                 <Label layoutX="12.0" layoutY="136.0" text="stadium:" />
                                 <ChoiceBox fx:id="tournamentType" layoutX="110.0" layoutY="31.0" onAction="#tornamenBoxFill" prefHeight="25.0" prefWidth="114.0" />
                                 <ChoiceBox fx:id="sportTypeBox1" layoutX="111.0" layoutY="80.0" onAction="#tornamenBoxFill" prefHeight="25.0" prefWidth="114.0" />
-                                <ChoiceBox fx:id="refereeBox" layoutX="110.0" layoutY="183.0" prefHeight="25.0" prefWidth="114.0" />
+                                <ChoiceBox fx:id="refereeBox" layoutX="110.0" layoutY="183.0" onMouseClicked="#emptyFieldsRedMassage" prefHeight="25.0" prefWidth="114.0" />
                                 <ChoiceBox fx:id="stadiumBox" layoutX="111.0" layoutY="132.0" prefHeight="25.0" prefWidth="114.0" />
                                 <Label layoutX="336.0" layoutY="26.0" text="competitor 1" />
                                 <Label layoutX="556.0" layoutY="26.0" text="competitor 2" />
@@ -143,11 +143,15 @@
                                 <Label layoutX="493.0" layoutY="65.0" text="country:" />
                                 <ChoiceBox fx:id="countryBox" layoutX="330.0" layoutY="61.0" onAction="#tornamenBoxFill" prefHeight="25.0" prefWidth="114.0" />
                                 <ChoiceBox fx:id="countryBox1" layoutX="550.0" layoutY="61.0" onAction="#tornamenBoxFill" prefHeight="25.0" prefWidth="114.0" />
-                                <ChoiceBox fx:id="athleteBox1" layoutX="330.0" layoutY="111.0" prefHeight="25.0" prefWidth="114.0" />
-                                <ChoiceBox fx:id="athleteBox2" layoutX="551.0" layoutY="111.0" prefHeight="25.0" prefWidth="114.0" />
+                                <ChoiceBox fx:id="athleteBox1" layoutX="330.0" layoutY="111.0" onMouseClicked="#emptyFieldsRedMassage" prefHeight="25.0" prefWidth="114.0" />
+                                <ChoiceBox fx:id="athleteBox2" layoutX="551.0" layoutY="111.0" onMouseClicked="#emptyFieldsRedMassage" prefHeight="25.0" prefWidth="114.0" />
                                 <Label layoutX="278.0" layoutY="115.0" text="athlete:" />
                                 <Label layoutX="493.0" layoutY="115.0" text="athlete:" />
                                 <Button fx:id="createTornamentBtn" layoutX="410.0" layoutY="196.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="121.0" text="create tournament" />
+                        <Label fx:id="tournamentRedLabel" layoutX="117.0" layoutY="56.0" />
+                        <Label fx:id="sportTypeRedLabel" layoutX="117.0" layoutY="106.0" />
+                        <Label fx:id="countryRedLabel" layoutX="340.0" layoutY="84.0" />
+                        <Label fx:id="country1RedLabel" layoutX="556.0" layoutY="84.0" />
                             </children></AnchorPane>
                     </content>
                 </Tab>
