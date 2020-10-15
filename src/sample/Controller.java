@@ -107,7 +107,7 @@ public class Controller implements Initializable {
     private ChoiceBox<String> tournamentType;
 
     @FXML
-    private ChoiceBox<String> sportTypeBox1;
+    private ChoiceBox<SportTypeAthleteANDReferee> sportTypeBox1;
 
     @FXML
     private ChoiceBox<String> refereeBox;
@@ -187,6 +187,7 @@ public class Controller implements Initializable {
         }
         countryMenu.getItems().addAll(menulistArray);
         menulistArray.clear();
+
 //        for (String i : model.getAllTournamentsString()) {
 //            menulistArray.add(new MenuItem(i));
 //        }
@@ -244,6 +245,8 @@ public class Controller implements Initializable {
         }
         if (!name.isEmpty() && !location.isEmpty() && numOfSeats != 0){
             dialogMassage(model.addstadium(name,location,numOfSeats));
+            stadiumBox.getItems().clear();
+            stadiumBox.getItems().addAll(model.getStadiumString());
             stadiumSeatsInput.clear();
             stadiumLocationInput.clear();
             stadiumNameInput.clear();
@@ -258,16 +261,25 @@ public class Controller implements Initializable {
     }
 
     public void tornamenBoxFill (ActionEvent e){
+        if (e.getSource().equals(tournamentType) || e.getSource().equals(sportTypeBox1)){
+            refereeBox.getSelectionModel().clearSelection();
+            countryBox.getSelectionModel().clearSelection();
+            countryBox1.getSelectionModel().clearSelection();
+            athleteBox1.getSelectionModel().clearSelection();
+            athleteBox2.getSelectionModel().clearSelection();
+        }
         String strTournamentType = tournamentType.getValue();
-        String sportType = sportTypeBox1.getValue();
+        SportTypeAthleteANDReferee sportType = sportTypeBox1.getValue();
         if(sportType != null && strTournamentType != null){
             refereeBox.getItems().clear();
-            refereeBox.getItems().addAll();//need to add the array of all matching referees
-            if (countryBox.getSelectionModel() != null){
-                athleteBox1.getItems().addAll();////need to add the array of all matching referees
+            refereeBox.getItems().addAll(model.getRefereesBySportTypeString(sportType));
+            String country = countryBox.getValue();
+            String country1 = countryBox1.getValue();
+            if (country != null){
+                athleteBox1.getItems().addAll(model.getAthletesByCountryAndSportType(country,sportType));////need to add the array of all matching Athletes
             }
-            if (countryBox1.getSelectionModel() != null){
-                athleteBox2.getItems().addAll();////need to add the array of all matching referees
+            if (country1 != null){
+                athleteBox2.getItems().addAll(model.getAthletesByCountryAndSportType(country1,sportType));////need to add the array of all matching referees
             }
         }
     }
@@ -288,28 +300,28 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList <MenuItem> menulistArray = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            menulistArray.add(new MenuItem("tournament type num" + (i+1)));//need to add refference to all tournament types array
-            menulistArray.get(i).setId("type" + i);
-
-            menulistArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    System.out.println(((MenuItem)event.getSource()).getId());
-                    System.out.println(((MenuItem)event.getSource()).getText());
-                    menuButtonEvent(((MenuItem)event.getSource()).getText());
-                }
-            });
-        }
+//        for (int i = 0; i < 5; i++) {
+//            menulistArray.add(new MenuItem("tournament type num" + (i+1)));//need to add refference to all tournament types array
+//            menulistArray.get(i).setId("type" + i);
+//
+//            menulistArray.get(i).setOnAction(new EventHandler<ActionEvent>() {
+//                @Override
+//                public void handle(ActionEvent event) {
+//                    System.out.println(((MenuItem)event.getSource()).getId());
+//                    System.out.println(((MenuItem)event.getSource()).getText());
+//                    menuButtonEvent(((MenuItem)event.getSource()).getText());
+//                }
+//            });
+//        }
         tournamentMenu.getItems().addAll(menulistArray);
         addItemsToMenu();
         tournamentType.getItems().addAll("solo", "group");
         sportTypeBox.getItems().addAll(SportTypeAthleteANDReferee.values());
         sportTypeBox1.getItems().addAll(SportTypeAthleteANDReferee.getAllSportTypes());
         sportTypeBox2.getItems().addAll(SportTypeAthleteANDReferee.values());
-        stadiumBox.getItems().addAll();//need to add the array of all stadiums
-        countryBox.getItems().addAll(model.getAllStateString());//need to add the array of all countrys
-        countryBox1.getItems().addAll(model.getAllStateString());//need to add the array of all countrys
+        stadiumBox.getItems().addAll(model.getStadiumString());
+        countryBox.getItems().addAll(model.getAllStateString());
+        countryBox1.getItems().addAll(model.getAllStateString());
 
     }
 

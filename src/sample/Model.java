@@ -85,10 +85,39 @@ public class Model {
     public ArrayList<String> getRefereesBySportTypeString (SportTypeAthleteANDReferee sportType){
         ArrayList<String> str = new ArrayList<>();
         for (Referee i : allReferees){
-            if (i.getSportType().equals(sportType))
+            if (i.getSportType().equals(sportType) || i.getSportType().equals(SportTypeAthleteANDReferee.RunnerAndJumper))
                 str.add(i.getName());
         }
         return str;
+    }
+    public ArrayList<String> getStadiumString(){
+        ArrayList<String> str = new ArrayList<>();
+        for (Stadium i : allStadiums){
+                str.add(i.getName());
+        }
+        return str;
+    }
+    public ArrayList<String> getAthletesByCountryAndSportType (String country,SportTypeAthleteANDReferee sportType){
+        ArrayList<String> str = new ArrayList<>();
+        ArrayList<Athlete> athletes = new ArrayList<>();
+        State state = getStateByName(country);
+        if (sportType.equals(SportTypeAthleteANDReferee.Jumper))
+            athletes = state.getAllTheJumpers();
+        else if(sportType.equals(SportTypeAthleteANDReferee.Runner))
+            athletes = state.getAllTheRunners();
+        for(Athlete i : athletes){
+            str.add(i.getName());
+        }
+        return str;
+
+    }
+
+    public State getStateByName (String name){
+        for (State i : allStates)
+            if (i.getName().equals(name))
+                return i;
+        return null;
+
     }
 
 }

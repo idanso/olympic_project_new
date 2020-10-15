@@ -21,15 +21,15 @@ public class State {
     public ArrayList getAllTheRunners(){
         ArrayList <Athlete> allTheRunners = new ArrayList<Athlete>();
         for(int i =0 ; i< athletes.size() ; i++) {
-            if(athletes.get(i).getSportType().equals("Runner") || athletes.get(i).getSportType().equals("RunnerANDJumper"))
+            if(athletes.get(i).getSportType().equals(SportTypeAthleteANDReferee.Runner) || athletes.get(i).getSportType().equals(SportTypeAthleteANDReferee.RunnerAndJumper))
                 allTheRunners.add(athletes.get(i));
         }
         return allTheRunners;
     }
     public ArrayList getAllTheJumpers(){
-        ArrayList <Athlete> allTheJumpers = new ArrayList<Athlete>();
+        ArrayList <Athlete> allTheJumpers = new ArrayList<>();
         for(int i =0 ; i< athletes.size() ; i++) {
-            if(athletes.get(i).getSportType().equals("Jumper") || athletes.get(i).getSportType().equals("RunnerANDJumper"))
+            if(athletes.get(i).getSportType().equals(SportTypeAthleteANDReferee.Jumper) || athletes.get(i).getSportType().equals(SportTypeAthleteANDReferee.RunnerAndJumper))
                 allTheJumpers.add(athletes.get(i));
         }
         return allTheJumpers;
