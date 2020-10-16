@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Model {
+public class Model <T>{
 
     public Referee getAllReferees;
     private static ArrayList<State> allStates = new ArrayList<>();
@@ -15,7 +15,44 @@ public class Model {
     //need to add Array of tournaments
     public ObservableList<Athlete> athletelist = FXCollections.observableArrayList();
     public ObservableList<Referee> refereelist = FXCollections.observableArrayList();
+    private ArrayList<Tournament> allTournaments = new ArrayList<>();
+    private T t;
 
+    public eDialogMassage addTournament(SportTypeAthleteANDReferee sportTypeOfTournament, Stadium stadium, Referee referee, ArrayList <T> list){
+        if(t instanceof State){
+            for (Tournament i : allTournaments){
+                if(i.getSportTypeOfTournament().equals(sportTypeOfTournament) && i.getStadium().equals(stadium) && i.getReferee().equals(referee) && i.getAllTeams().equals(list))
+                    return eDialogMassage.IN_SYSTEM;
+            }
+        }
+        else{
+            for (Tournament i : allTournaments){
+                if(i.getSportTypeOfTournament().equals(sportTypeOfTournament) && i.getStadium().equals(stadium) && i.getReferee().equals(referee) && i.getAllTeams().equals(list))
+                    return eDialogMassage.IN_SYSTEM;
+            }
+        }
+        allTournaments.add(new Tournament(sportTypeOfTournament,stadium,referee,list));
+        return eDialogMassage.SUCCESS;
+    }
+    //the next to functions are in case the generics here wont work
+    //
+   /* public eDialogMassage addTournamentTeams (SportTypeAthleteANDReferee sportTypeOfTournament, Stadium stadium, Referee referee, ArrayList<State> allTeams){// tournament of teams
+        for (Tournament i : allTournaments){
+            if(i.getSportTypeOfTournament().equals(sportTypeOfTournament) && i.getStadium().equals(stadium) && i.getReferee().equals(referee) && i.getAllTeams().equals(allTeams))
+                return eDialogMassage.IN_SYSTEM;
+        }
+        allTournaments.add(new Tournament(sportTypeOfTournament,stadium,referee,allTeams));
+        return eDialogMassage.SUCCESS;
+    }
+
+    public eDialogMassage addTournamentPersonal(SportTypeAthleteANDReferee sportTypeOfTournament, Stadium stadium, Referee referee, ArrayList<Athlete> allAthletes){
+        for (Tournament i : allTournaments){
+            if(i.getSportTypeOfTournament().equals(sportTypeOfTournament) && i.getStadium().equals(stadium) && i.getReferee().equals(referee) && i.getAllTeams().equals(allAthletes))
+                return eDialogMassage.IN_SYSTEM;
+        }
+        allTournaments.add(new Tournament(sportTypeOfTournament,stadium,referee,allAthletes));
+        return eDialogMassage.SUCCESS;
+    }*/
     public eDialogMassage addstadium(String name, String location, int numberOfSeats){
         for (Stadium i : allStadiums){
             if(i.equals(name))
