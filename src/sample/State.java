@@ -1,8 +1,9 @@
 package sample;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class State {
+public class State{
     private String name;
     private ArrayList<Integer> finalPlaceAtTheTournament;
     private ArrayList<Athlete> athletes;
@@ -41,6 +42,7 @@ public class State {
 
     public void addMedal(int place) {//מוסיף מדלייה לאוסף של המדינה
         this.finalPlaceAtTheTournament.add(place);
+
     }
 
     public void addPlayer(Athlete athlete){
@@ -67,8 +69,9 @@ public class State {
                 else totalPoints =+ 1;
             }
         }
-        return totalPoints;
+         return totalPoints;
     }
+
     public String getName(){
         return name;
     }
@@ -95,12 +98,14 @@ public class State {
 
 
 
+
     @Override
     public String toString() {
-        return "State{"; // +
-             //   "Name='" + name + '\'' +
-               // ", The running team=" + getAllTheRunners() +
-               // ", The jumping team=" + getAllTheJumpers() +
-                //'}';
+        return "State{" +
+                "Name='" + name + '\'' +
+                ", The running team=" + getAllTheRunners() +
+                ", The jumping team=" + getAllTheJumpers() +
+                '}';
     }
+
 }

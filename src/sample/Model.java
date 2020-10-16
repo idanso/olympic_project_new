@@ -1,9 +1,12 @@
 package sample;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Model {
 
+    public Referee getAllReferees;
     private ArrayList<State> allStates = new ArrayList<>();
     private ArrayList<Stadium> allStadiums = new ArrayList<>();
     private ArrayList<Referee> allReferees = new ArrayList<>();
@@ -76,6 +79,16 @@ public class Model {
         }
         return str;
     }
+
+    public ArrayList<String> getAllStatesWithAthletes (){
+        ArrayList<String> str = new ArrayList<>();
+        for (State i : allStates){
+            if(!i.getAthletes().isEmpty())
+                str.add(i.getName());
+        }
+        return str;
+    }
+
     public ArrayList<String> getAllRefereesString (){
         ArrayList<String> str = new ArrayList<>();
         for (Referee i : allReferees){
@@ -110,7 +123,6 @@ public class Model {
             str.add(i.getName());
         }
         return str;
-
     }
 
     public State getStateByName (String name){
@@ -121,4 +133,16 @@ public class Model {
 
     }
 
+    public ArrayList<State> getPodium (){
+        ArrayList<State> podium = new ArrayList<>();
+        if(getAllStatesWithAthletes().size() >= 3){
+            Collections.sort(allStates, new SortByMedal());
+            podium = (ArrayList)getAllStatesWithAthletes().subList(0,2);
+        } else return null;
+        return podium;
+    }
+
+    public ArrayList<Referee> getAllReferees (){
+        return allReferees;
+    }
 }
