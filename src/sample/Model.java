@@ -1,16 +1,20 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class Model {
 
     public Referee getAllReferees;
-    private ArrayList<State> allStates = new ArrayList<>();
-    private ArrayList<Stadium> allStadiums = new ArrayList<>();
-    private ArrayList<Referee> allReferees = new ArrayList<>();
+    private static ArrayList<State> allStates = new ArrayList<>();
+    private static ArrayList<Stadium> allStadiums = new ArrayList<>();
+    private static ArrayList<Referee> allReferees = new ArrayList<>();
     //need to add Array of tournaments
+    public ObservableList<Athlete> athletelist = FXCollections.observableArrayList();
+    public ObservableList<Referee> refereelist = FXCollections.observableArrayList();
 
     public eDialogMassage addstadium(String name, String location, int numberOfSeats){
         for (Stadium i : allStadiums){
@@ -70,7 +74,7 @@ public class Model {
                 i.deletePlayer(name);
             }
         }
-        return eDialogMassage.SUCCESS;
+        return eDialogMassage.DELETE_SUCCESS;
     }
     public ArrayList<String> getAllStateString (){
         ArrayList<String> str = new ArrayList<>();
@@ -137,8 +141,14 @@ public class Model {
         ArrayList<State> podium = new ArrayList<>();
         if(getAllStatesWithAthletes().size() >= 3){
             Collections.sort(allStates, new SortByMedal());
-            podium = (ArrayList)getAllStatesWithAthletes().subList(0,2);
-        } else return null;
+            int counter = 0;
+            while(counter < 3)
+                if(!allStates.get(counter).getAthletes().isEmpty()) {
+                    podium.add(allStates.get(counter));
+                    counter++;
+                }
+
+        }
         return podium;
     }
 

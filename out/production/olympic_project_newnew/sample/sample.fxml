@@ -1,30 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox prefHeight="390.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
         <HBox>
             <children>
-                <Button fx:id="changeTomanagerPage" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="manage page" textAlignment="CENTER" />
+                <Button fx:id="changeTomanagerPage" mnemonicParsing="false" onAction="#sceneSwitchEvent" prefHeight="25.0" prefWidth="121.0" text="manage page" textAlignment="CENTER" />
                 <TextFlow prefHeight="31.0" prefWidth="562.0" textAlignment="CENTER">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="Olympic Games Program" textAlignment="CENTER" underline="true">
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Olympic Games Program - view page" textAlignment="CENTER" underline="true">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -103,7 +90,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab fx:id="viewMedalsTab" text="medals summery">
+                <Tab fx:id="viewMedalsTab" onSelectionChanged="#updateMedalView" text="medals summery">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="330.0" prefWidth="533.0">
                             <children>
@@ -114,137 +101,23 @@
                                             <font>
                                                 <Font size="18.0" />
                                             </font></Label>
-                                        <Label fx:id="countryFirstLable" layoutX="189.0" layoutY="61.0" text="country name" />
-                                        <Label fx:id="numOfMedalsFirstLable" layoutX="461.0" layoutY="61.0" text="number of medals" />
+                                        <Label fx:id="countryFirstLable" layoutX="189.0" layoutY="61.0" />
+                                        <Label fx:id="numOfMedalsFirstLable" layoutX="461.0" layoutY="61.0" />
                                         <Label layoutX="161.0" layoutY="120.0" text="second place" underline="true">
                                             <font>
                                                 <Font size="18.0" />
                                             </font></Label>
-                                        <Label fx:id="countrySecondLable" layoutX="69.0" layoutY="179.0" text="country name" />
-                                        <Label fx:id="numOfMedalsSecondLable" layoutX="262.0" layoutY="179.0" text="num of medals" />
+                                        <Label fx:id="countrySecondLable" layoutX="69.0" layoutY="179.0" />
+                                        <Label fx:id="numOfMedalsSecondLable" layoutX="262.0" layoutY="179.0" />
                                         <Label layoutX="509.0" layoutY="120.0" text="third place" underline="true">
                                             <font>
                                                 <Font size="18.0" />
                                             </font></Label>
-                                        <Label fx:id="countryThirdLable" layoutX="405.0" layoutY="179.0" text="country name" />
-                                        <Label fx:id="numOfMedalsThirdLable" layoutX="593.0" layoutY="179.0" text="num of medals" />
+                                        <Label fx:id="countryThirdLable" layoutX="405.0" layoutY="179.0" />
+                                        <Label fx:id="numOfMedalsThirdLable" layoutX="593.0" layoutY="179.0" />
                                     </children>
                                 </Pane>
                             </children></AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="edit athletes">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Pane layoutX="-6.0" layoutY="-4.0" prefHeight="337.0" prefWidth="714.0">
-                                    <children>
-                                        <Label layoutX="26.0" layoutY="66.0" text="full name:" />
-                                        <Label layoutX="52.0" layoutY="120.0" text="type:" />
-                                        <Button fx:id="athleteSubmitBtn" layoutX="107.0" layoutY="225.0" mnemonicParsing="false" onAction="#editAthleteBtnsEvent" text="submit" />
-                                        <Label layoutX="35.0" layoutY="173.0" text="country:" />
-                                        <TextField fx:id="fullNameRegisterInput" layoutX="107.0" layoutY="62.0" />
-                                        <Label layoutX="372.0" layoutY="66.0" text="full name:" />
-                                        <TextField fx:id="fullNameDeleteInput" layoutX="455.0" layoutY="62.0" />
-                                        <Button fx:id="athleteDeleteBtn" layoutX="455.0" layoutY="116.0" mnemonicParsing="false" onAction="#editAthleteBtnsEvent" text="delete athlete" />
-                                        <Label layoutX="86.0" layoutY="14.0" text="adding athlete" textAlignment="CENTER" underline="true">
-                                            <font>
-                                                <Font name="System Bold" size="23.0" />
-                                            </font>
-                                        </Label>
-                                        <Label layoutX="454.0" layoutY="14.0" text="delete athlete" textAlignment="CENTER" underline="true">
-                                            <font>
-                                                <Font name="System Bold" size="23.0" />
-                                            </font>
-                                        </Label>
-                                        <ChoiceBox fx:id="sportTypeBox" layoutX="106.0" layoutY="116.0" prefHeight="25.0" prefWidth="129.0" />
-                                        <TextField fx:id="countryInput" layoutX="107.0" layoutY="169.0" />
-                                    </children>
-                                </Pane>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="edit tournaments">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Label layoutX="12.0" layoutY="35.0" text="tournament type:" />
-                                <Label layoutX="12.0" layoutY="84.0" text="sport type:" />
-                                <Label layoutX="15.0" layoutY="187.0" text="referee:" />
-                                <Label layoutX="12.0" layoutY="136.0" text="stadium:" />
-                                <ChoiceBox fx:id="tournamentType" layoutX="110.0" layoutY="31.0" onAction="#tornamenBoxFill" prefHeight="25.0" prefWidth="114.0" />
-                                <ChoiceBox fx:id="sportTypeBox1" layoutX="111.0" layoutY="80.0" onAction="#tornamenBoxFill" prefHeight="25.0" prefWidth="114.0" />
-                                <ChoiceBox fx:id="refereeBox" layoutX="110.0" layoutY="183.0" onMouseClicked="#emptyFieldsRedMassage" prefHeight="25.0" prefWidth="114.0" />
-                                <ChoiceBox fx:id="stadiumBox" layoutX="111.0" layoutY="132.0" prefHeight="25.0" prefWidth="114.0" />
-                                <Label layoutX="336.0" layoutY="26.0" text="competitor 1" />
-                                <Label layoutX="556.0" layoutY="26.0" text="competitor 2" />
-                                <Label layoutX="278.0" layoutY="65.0" text="country:" />
-                                <Label layoutX="493.0" layoutY="65.0" text="country:" />
-                                <ChoiceBox fx:id="countryBox" layoutX="330.0" layoutY="61.0" onAction="#tornamenBoxFill" prefHeight="25.0" prefWidth="114.0" />
-                                <ChoiceBox fx:id="countryBox1" layoutX="550.0" layoutY="61.0" onAction="#tornamenBoxFill" prefHeight="25.0" prefWidth="114.0" />
-                                <ChoiceBox fx:id="athleteBox1" layoutX="330.0" layoutY="111.0" onMouseClicked="#emptyFieldsRedMassage" prefHeight="25.0" prefWidth="114.0" />
-                                <ChoiceBox fx:id="athleteBox2" layoutX="551.0" layoutY="111.0" onMouseClicked="#emptyFieldsRedMassage" prefHeight="25.0" prefWidth="114.0" />
-                                <Label layoutX="278.0" layoutY="115.0" text="athlete:" />
-                                <Label layoutX="493.0" layoutY="115.0" text="athlete:" />
-                                <Button fx:id="createTornamentBtn" layoutX="410.0" layoutY="196.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="121.0" text="create tournament" />
-                                <Label fx:id="tournamentRedLabel" layoutX="117.0" layoutY="56.0" />
-                                <Label fx:id="sportTypeRedLabel" layoutX="117.0" layoutY="106.0" />
-                                <Label fx:id="countryRedLabel" layoutX="340.0" layoutY="84.0" />
-                                <Label fx:id="country1RedLabel" layoutX="556.0" layoutY="84.0" />
-                            </children></AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="add stadium">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="330.0" prefWidth="707.0">
-                                    <children>
-                                        <Label layoutX="31.0" layoutY="115.0" text="name:" />
-                                        <Label layoutX="243.0" layoutY="24.0" text="Adding Stadium To System " underline="true">
-                                            <font>
-                                                <Font size="18.0" />
-                                            </font></Label>
-                                        <Label layoutX="253.0" layoutY="115.0" text="location:" />
-                                        <Label layoutX="491.0" layoutY="115.0" text="number of seat:s" />
-                                        <TextField fx:id="stadiumNameInput" layoutX="79.0" layoutY="111.0" promptText="Enter name" />
-                                        <TextField fx:id="stadiumLocationInput" layoutX="315.0" layoutY="111.0" promptText="Enter location" />
-                                        <TextField fx:id="stadiumSeatsInput" layoutX="589.0" layoutY="111.0" prefHeight="25.0" prefWidth="98.0" promptText="Enter number" />
-                                        <Label fx:id="seatsInputExceptionLabel" layoutX="515.0" layoutY="136.0" prefHeight="17.0" prefWidth="180.0" />
-                                    </children>
-                                </AnchorPane>
-                                <Button fx:id="addStadiumBtn" layoutX="263.0" layoutY="181.0" mnemonicParsing="false" onAction="#addStadiumBtn" prefHeight="40.0" prefWidth="121.0" text="Add stadium" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="add referee">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="329.0" prefWidth="707.0">
-                                    <children>
-                                        <Pane layoutX="-6.0" layoutY="-4.0" prefHeight="337.0" prefWidth="714.0">
-                                            <children>
-                                                <Label layoutX="26.0" layoutY="66.0" text="full name:" />
-                                                <Label layoutX="52.0" layoutY="120.0" text="type:" />
-                                                <Button fx:id="refereeSubmitBtn" layoutX="107.0" layoutY="225.0" mnemonicParsing="false" onAction="#addRefereeBtn" text="submit" />
-                                                <Label layoutX="30.0" layoutY="173.0" text="country:" />
-                                                <TextField fx:id="refereeFullNameInput1" layoutX="106.0" layoutY="62.0" />
-                                                <Label layoutX="86.0" layoutY="14.0" text="adding referee" textAlignment="CENTER" underline="true">
-                                                    <font>
-                                                        <Font name="System Bold" size="23.0" />
-                                                    </font>
-                                                </Label>
-                                                <ChoiceBox fx:id="sportTypeBox2" layoutX="106.0" layoutY="116.0" prefHeight="25.0" prefWidth="129.0" />
-                                                <TextField fx:id="refereeCountryInput" layoutX="106.0" layoutY="169.0" />
-                                            </children>
-                                        </Pane>
-                                    </children>
-                                </AnchorPane>
-                            </children>
-                        </AnchorPane>
                     </content>
                 </Tab>
             </tabs>
