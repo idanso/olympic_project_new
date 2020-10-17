@@ -25,7 +25,8 @@ public class Tournament <T>{
         for (int i=1 ; i<=3 ; i++) {
             int number = randomNumber.nextInt(copyArray.size());
             podiumArray.add(list.get(number));
-            ((State) podiumArray.get(i - 1)).addMedal(i);
+            if(t instanceof State) ((State) podiumArray.get(i - 1)).addMedal(i);
+            else if(t instanceof Athlete) ((Athlete) podiumArray.get(i - 1)).addMedal(i);
             copyArray.remove(number);//מוחק את מי שנבחר בהגרלה מהמערך הרזרבי שיצרתי בהתחלה ןלא מהמקורי
         }
     }

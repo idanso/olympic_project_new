@@ -7,6 +7,10 @@ public class Athlete extends Person {
         setSportType(sportType);
     }
 
+    public void addMedal(int place) {//מוסיף מדלייה לאוסף של המדינה
+        this.getState().addMedal(place);
+    }
+
     @Override
     public SportTypeAthleteANDReferee getSportType() {
         return sportType;
@@ -14,6 +18,9 @@ public class Athlete extends Person {
 
     public void setSportType(SportTypeAthleteANDReferee sportType) {
         this.sportType = sportType;
+    }
+    public State getState(){
+        return StateName;
     }
 
     @Override
