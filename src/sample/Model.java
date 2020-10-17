@@ -24,9 +24,7 @@ public class Model <T>{
             boolean isEqualTypeOfTournament = i.getSportTypeOfTournament().equals(sportTypeOfTournament);
             boolean isEqualStadium = i.getStadium().equals(stadium);
             boolean isEqualReferee = i.getReferee().equals(referee);
-
             if (isEqualTypeOfTournament && isEqualStadium && isEqualReferee) {
-
                 if (t instanceof State) {
                     if (i.getAllTeams().equals(list)) {
                         return eDialogMassage.IN_SYSTEM;
@@ -38,8 +36,8 @@ public class Model <T>{
                 }
             }
         }
-
         allTournaments.add(new Tournament<T>(sportTypeOfTournament, stadium, referee, list));
+        allTournaments.get(allTournaments.size()-1).getPodiumAndUpdateTheWinners(list);
         return eDialogMassage.SUCCESS;
     }
 

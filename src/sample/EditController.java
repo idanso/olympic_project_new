@@ -212,15 +212,15 @@ public class EditController implements Initializable {
         String stadium = stadiumBox.getValue();
         if (strTournamentType != null && sportType != null && !model.tournametAthleteList.isEmpty() &&
                 referee != null && stadium != null){
-
-            model.addTournament(sportType,model.getStadiumByName(stadium), model.getRefereeByName(referee), (ArrayList)model.tournametAthleteList);
-            //need to add reference to build tournament
+            if (tournamentType.equals("solo")) {
+                model.addTournament(sportType,model.getStadiumByName(stadium), model.getRefereeByName(referee), (ArrayList)model.tournametAthleteList);
+            }
+            else
+                model.addTournament(sportType,model.getStadiumByName(stadium), model.getRefereeByName(referee), (ArrayList)model.tournametStateList);
         }
         else
             dialogMassage(eDialogMassage.EMPTY);
     }
-
-
 
     public void tornamenBoxFill (ActionEvent e){
         if (e.getSource().equals(tournamentType) || e.getSource().equals(sportTypeBox1)){
@@ -246,7 +246,6 @@ public class EditController implements Initializable {
                 tournamentAthletesTapbleView.getColumns().clear();
                 tournamentAthletesTapbleView.getColumns().add(new TableColumn("country"));
                 ((TableColumn) tournamentAthletesTapbleView.getColumns().get(0)).setPrefWidth(180);
-                // ((TableColumn)tournamentAthletesTapbleView.getColumns().get(1)).setPrefWidth(320);
             }
         }
         SportTypeAthleteANDReferee sportType = sportTypeBox1.getValue();
