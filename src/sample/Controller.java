@@ -44,7 +44,7 @@ public class Controller implements Initializable {
     private TableColumn<Referee , String> refereeNameCol;
 
     @FXML
-    private TableColumn<Referee , String> refereeCountryCol;
+    private TableColumn<Referee , String > refereeCountryCol;
 
     @FXML
     private TableColumn<Referee, SportTypeAthleteANDReferee> refereeTypecol;
@@ -69,19 +69,19 @@ public class Controller implements Initializable {
 
     public void athleteTableViewUpdate(String country){
         athletesTableView.getItems().clear();
-        model.athletelist.addAll(model.getStateByName(country).getAthletes());
+        model.athleteList.addAll(model.getStateByName(country).getAthletes());
         athlleteNameCol.setCellValueFactory(new PropertyValueFactory<Athlete, String>("name"));
         athleteTypecol.setCellValueFactory(new PropertyValueFactory<Athlete,SportTypeAthleteANDReferee>("sportType"));
-        athletesTableView.setItems(model.athletelist);
+        athletesTableView.setItems(model.athleteList);
     }
 
     public void refereeTableViewUpdate(){
         refereeTableView.getItems().clear();
-        model.refereelist.addAll(model.getAllReferees());
+        model.refereeList.addAll(model.getAllReferees());
         refereeNameCol.setCellValueFactory(new PropertyValueFactory<Referee,String>("name"));
-        refereeCountryCol.setCellValueFactory(new PropertyValueFactory<Referee,String>("stateString"));
+        refereeCountryCol.setCellValueFactory((new PropertyValueFactory<Referee,String>("stateString")));
         refereeTypecol.setCellValueFactory(new PropertyValueFactory<Referee, SportTypeAthleteANDReferee>("sportType"));
-        refereeTableView.setItems(model.refereelist);
+        refereeTableView.setItems(model.refereeList);
 
 
     }

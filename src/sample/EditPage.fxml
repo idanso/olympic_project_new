@@ -66,21 +66,28 @@
                                 <ChoiceBox fx:id="sportTypeBox1" layoutX="111.0" layoutY="80.0" onAction="#tornamenBoxFill" prefHeight="25.0" prefWidth="114.0" />
                                 <ChoiceBox fx:id="refereeBox" layoutX="110.0" layoutY="183.0" onMouseClicked="#emptyFieldsRedMassage" prefHeight="25.0" prefWidth="114.0" />
                                 <ChoiceBox fx:id="stadiumBox" layoutX="111.0" layoutY="132.0" prefHeight="25.0" prefWidth="114.0" />
-                                <Label layoutX="336.0" layoutY="26.0" text="competitor 1" />
-                                <Label layoutX="556.0" layoutY="26.0" text="competitor 2" />
-                                <Label layoutX="278.0" layoutY="65.0" text="country:" />
-                                <Label layoutX="493.0" layoutY="65.0" text="country:" />
-                                <ChoiceBox fx:id="countryBox" layoutX="330.0" layoutY="61.0" onAction="#tornamenBoxFill" prefHeight="25.0" prefWidth="114.0" />
-                                <ChoiceBox fx:id="countryBox1" layoutX="550.0" layoutY="61.0" onAction="#tornamenBoxFill" prefHeight="25.0" prefWidth="114.0" />
-                                <ChoiceBox fx:id="athleteBox1" layoutX="330.0" layoutY="111.0" onMouseClicked="#emptyFieldsRedMassage" prefHeight="25.0" prefWidth="114.0" />
-                                <ChoiceBox fx:id="athleteBox2" layoutX="551.0" layoutY="111.0" onMouseClicked="#emptyFieldsRedMassage" prefHeight="25.0" prefWidth="114.0" />
-                                <Label layoutX="278.0" layoutY="115.0" text="athlete:" />
-                                <Label layoutX="493.0" layoutY="115.0" text="athlete:" />
-                                <Button fx:id="createTornamentBtn" layoutX="410.0" layoutY="196.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="121.0" text="create tournament" />
+                                <Label layoutX="424.0" layoutY="14.0" text="add competitor" underline="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                                <Label layoutX="279.0" layoutY="47.0" text="country:" />
+                                <ChoiceBox fx:id="countryBox" layoutX="330.0" layoutY="43.0" onAction="#tornamenBoxFill" onMouseClicked="#emptyFieldsRedMassage" prefHeight="25.0" prefWidth="114.0" />
+                                <ChoiceBox fx:id="athleteBox1" layoutX="520.0" layoutY="43.0" onMouseClicked="#emptyFieldsRedMassage" prefHeight="25.0" prefWidth="114.0" />
+                                <Label fx:id="tournamentAthleteLabel" layoutX="472.0" layoutY="47.0" text="athlete:" />
+                                <Button fx:id="createTornamentBtn" layoutX="45.0" layoutY="248.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="143.0" text="create tournament" />
                                 <Label fx:id="tournamentRedLabel" layoutX="117.0" layoutY="56.0" />
                                 <Label fx:id="sportTypeRedLabel" layoutX="117.0" layoutY="106.0" />
-                                <Label fx:id="countryRedLabel" layoutX="340.0" layoutY="84.0" />
-                                <Label fx:id="country1RedLabel" layoutX="556.0" layoutY="84.0" />
+                                <Label fx:id="countryRedLabel" layoutX="330.0" layoutY="64.0" prefHeight="17.0" prefWidth="113.0" />
+                        <ScrollPane layoutX="267.0" layoutY="83.0" prefHeight="221.0" prefWidth="455.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="tournamentAthletesTapbleView" prefHeight="219.0" prefWidth="453.0" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
+                        <Button fx:id="tournamentAddButton" layoutX="658.0" layoutY="43.0" mnemonicParsing="false" onAction="#toutnamentAddToTableView" prefHeight="25.0" prefWidth="57.0" text="Add" />
                             </children></AnchorPane>
                     </content>
                 </Tab>

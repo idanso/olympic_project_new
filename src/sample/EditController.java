@@ -1,9 +1,5 @@
 package sample;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,13 +59,7 @@ public class EditController implements Initializable {
     private ChoiceBox<String> countryBox;
 
     @FXML
-    private ChoiceBox<String> countryBox1;
-
-    @FXML
     private ChoiceBox<String> athleteBox1;
-
-    @FXML
-    private ChoiceBox<String> athleteBox2;
 
     @FXML
     private TextField stadiumNameInput;
@@ -102,7 +92,17 @@ public class EditController implements Initializable {
     private Label countryRedLabel;
 
     @FXML
+    private Label tournamentAthleteLabel;
+
+    @FXML
+    private TableView tournamentAthletesTapbleView;
+
+    @FXML
+    private Button tournamentAddButton;
+
+    @FXML
     private Label country1RedLabel;
+    private TableColumn TableColumn;
 
 
     public void sceneSwitchEvent (ActionEvent event) throws IOException {
@@ -118,8 +118,6 @@ public class EditController implements Initializable {
     public void addItemsToMenu(){
         countryBox.getItems().clear();
         countryBox.getItems().addAll(model.getAllStatesWithAthletes());
-        countryBox1.getItems().clear();
-        countryBox1.getItems().addAll(model.getAllStatesWithAthletes());
     }
 
     public void editAthleteBtnsEvent (ActionEvent e) {
@@ -129,10 +127,10 @@ public class EditController implements Initializable {
         try {
             if (e.getSource() == athleteSubmitBtn) {
                 fullName = fullNameRegisterInput.getText();
-                SportTypeAthleteANDReferee sportType = (SportTypeAthleteANDReferee)sportTypeBox.getValue();
+                SportTypeAthleteANDReferee athleteSportType = (SportTypeAthleteANDReferee)sportTypeBox.getValue();
                 String country = countryInput.getText();
-                if (!fullName.isEmpty() && sportType != null && country != null) {
-                    dialogMassage(model.addAthlete(fullName,country,sportType));
+                if (!fullName.isEmpty() && athleteSportType != null && country != null) {
+                    dialogMassage(model.addAthlete(fullName,country,athleteSportType));
                     addItemsToMenu();
                     fullNameRegisterInput.clear();
                     sportTypeBox.getSelectionModel().clearSelection();
@@ -203,73 +201,103 @@ public class EditController implements Initializable {
             countryRedLabel.setText("required field first");
             countryRedLabel.setTextFill(Paint.valueOf("red"));
         }
-        if(e.getSource().equals(athleteBox2) && countryBox1.getValue() == null){
-            country1RedLabel.setText("required field first");
-            country1RedLabel.setTextFill(Paint.valueOf("red"));
-        }
 
     }
     public void addTournamenBtn(ActionEvent e){
         String strTournamentType = tournamentType.getValue();
         SportTypeAthleteANDReferee sportType = sportTypeBox1.getValue();
         String country = countryBox.getValue();
-        String country1 = countryBox1.getValue();
         String athlete1 = athleteBox1.getValue();
-        String athlete2 = athleteBox1.getValue();
         String referee = refereeBox.getValue();
         String stadium = stadiumBox.getValue();
-        if (!strTournamentType.equals(null) && !sportType.equals(null) && !country.equals(null) &&
-                !country1.equals(null) && !athlete1.equals(null) && !athlete2.equals(null) &&
-                !referee.equals(null) && !stadium.equals(null)){
+        if (strTournamentType != null && sportType != null && !model.tournametAthleteList.isEmpty() &&
+                referee != null && stadium != null){
+
+            model.addTournament(sportType,model.getStadiumByName(stadium), model.getRefereeByName(referee), (ArrayList)model.tournametAthleteList);
             //need to add reference to build tournament
         }
         else
             dialogMassage(eDialogMassage.EMPTY);
     }
 
+
+
     public void tornamenBoxFill (ActionEvent e){
         if (e.getSource().equals(tournamentType) || e.getSource().equals(sportTypeBox1)){
             refereeBox.getSelectionModel().clearSelection();
             countryBox.getSelectionModel().clearSelection();
-            countryBox1.getSelectionModel().clearSelection();
             athleteBox1.getSelectionModel().clearSelection();
-            athleteBox2.getSelectionModel().clearSelection();
+            tournamentAthletesTapbleView.getItems().clear();
+            model.tournametAthleteList.clear();
         }
         String strTournamentType = tournamentType.getValue();
+        if(!e.getSource().equals(countryBox)) {
+            if (strTournamentType.equals("solo")) {
+                athleteBox1.setVisible(true);
+                tournamentAthleteLabel.setVisible(true);
+                tournamentAthletesTapbleView.getColumns().clear();
+                tournamentAthletesTapbleView.getColumns().addAll(new TableColumn("full name"), new TableColumn("country"), new TableColumn("sport type"));
+                ((TableColumn) tournamentAthletesTapbleView.getColumns().get(0)).setPrefWidth(143);
+                ((TableColumn) tournamentAthletesTapbleView.getColumns().get(1)).setPrefWidth(135);
+                ((TableColumn) tournamentAthletesTapbleView.getColumns().get(2)).setPrefWidth(172);
+            } else {
+                athleteBox1.setVisible(false);
+                tournamentAthleteLabel.setVisible(false);
+                tournamentAthletesTapbleView.getColumns().clear();
+                tournamentAthletesTapbleView.getColumns().add(new TableColumn("country"));
+                ((TableColumn) tournamentAthletesTapbleView.getColumns().get(0)).setPrefWidth(180);
+                // ((TableColumn)tournamentAthletesTapbleView.getColumns().get(1)).setPrefWidth(320);
+            }
+        }
         SportTypeAthleteANDReferee sportType = sportTypeBox1.getValue();
         if (sportType != null)
             sportTypeRedLabel.setText("");
         if (strTournamentType != null)
             tournamentRedLabel.setText("");
         if(sportType != null && strTournamentType != null){
-            refereeBox.getItems().clear();
-            refereeBox.getItems().addAll(model.getRefereesBySportTypeString(sportType));
-            String country = countryBox.getValue();
-            String country1 = countryBox1.getValue();
-            if (tournamentType.getValue().equals("group")) {
-                athleteBox1.getItems().clear();
-                athleteBox1.getItems().add("The team");
-                athleteBox2.getItems().clear();
-                athleteBox2.getItems().add("The team");
+            if(!e.getSource().equals(countryBox)) {
+                refereeBox.getItems().clear();
+                refereeBox.getItems().addAll(model.getRefereesBySportTypeString(sportType));
             }
-            else {
-                if (country != null) {
-                    countryRedLabel.setText("");
-                    if (e.getSource().equals(countryBox)) {
-                        athleteBox1.getItems().clear();
-                        athleteBox1.getItems().addAll(model.getAthletesByCountryAndSportType(country, sportType));
-                    }
+            String country = countryBox.getValue();
+            if (country != null) {
+                countryRedLabel.setText("");
+                if (e.getSource().equals(countryBox) && strTournamentType.equals("solo")) {
+                    athleteBox1.getItems().clear();
+                    athleteBox1.getItems().addAll(model.getAthletesByCountryAndSportType(country, sportType));
                 }
-                if (country1 != null) {
-                    country1RedLabel.setText("");
-                    if (e.getSource().equals(countryBox1)) {
-                        athleteBox2.getItems().clear();
-                        athleteBox2.getItems().addAll(model.getAthletesByCountryAndSportType(country1, sportType));
-                    }
-                }
-
             }
         }
+    }
+
+    public void toutnamentAddToTableView(ActionEvent e){
+        if (tournamentType.getValue().equals("solo")){
+            String country = countryBox.getValue();
+            String athlete = athleteBox1.getValue();
+            if (country != null && athlete != null) {
+                if (!model.tournametAthleteList.contains(model.getStateByName(country).getAthleteByName(athlete))) {
+                    model.tournametAthleteList.add(model.getStateByName(country).getAthleteByName(athlete));
+                    ((TableColumn)tournamentAthletesTapbleView.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<Athlete, String>("name"));
+                    ((TableColumn)tournamentAthletesTapbleView.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<Athlete, String>("stateString"));
+                    ((TableColumn)tournamentAthletesTapbleView.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<Athlete, SportTypeAthleteANDReferee>("sportType"));
+                    tournamentAthletesTapbleView.setItems(model.tournametAthleteList);
+                } else dialogMassage(eDialogMassage.IN_SYSTEM);
+            } else dialogMassage(eDialogMassage.EMPTY);
+        }
+        else {
+            String country = countryBox.getValue();
+            if (country != null){
+                if (!model.tournametStateList.contains(model.getStateByName(country))) {
+                    model.tournametStateList.add(model.getStateByName(country));
+                    ((TableColumn)tournamentAthletesTapbleView.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<State, String>("name"));
+                    tournamentAthletesTapbleView.setItems(model.tournametStateList);
+                }else dialogMassage(eDialogMassage.IN_SYSTEM);
+            }else dialogMassage(eDialogMassage.EMPTY);
+
+
+
+        }
+
     }
 
     public void addRefereeBtn (ActionEvent e){
@@ -297,18 +325,17 @@ public class EditController implements Initializable {
         sportTypeBox1.getItems().clear();
         sportTypeBox2.getItems().clear();
         stadiumBox.getItems().clear();
-        countryBox.getItems().clear();
-        countryBox1.getItems().clear();
         addItemsToMenu();
-        tournamentType.getItems().addAll("solo", "group");
+        tournamentType.getItems().addAll("solo", "team");
         sportTypeBox.getItems().addAll(SportTypeAthleteANDReferee.values());
         sportTypeBox1.getItems().addAll(SportTypeAthleteANDReferee.getAllSportTypes());
         sportTypeBox2.getItems().addAll(SportTypeAthleteANDReferee.values());
         stadiumBox.getItems().addAll(model.getStadiumString());
-        countryBox.getItems().addAll(model.getAllStatesWithAthletes());
-        countryBox1.getItems().addAll(model.getAllStatesWithAthletes());
-    }
+        athleteBox1.setVisible(false);
+        tournamentAthleteLabel.setVisible(false);
 
+
+    }
 
     public void dialogMassage(eDialogMassage massage ){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

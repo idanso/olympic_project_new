@@ -115,6 +115,7 @@
                                             </font></Label>
                                         <Label fx:id="countryThirdLable" layoutX="405.0" layoutY="179.0" />
                                         <Label fx:id="numOfMedalsThirdLable" layoutX="593.0" layoutY="179.0" />
+                              <Label layoutY="301.0" prefHeight="17.0" prefWidth="712.0" text="*the podium is calculated by converting all the medal into points (first place - 3 points , second place 2 points...) and summarize them" />
                                     </children>
                                 </Pane>
                             </children></AnchorPane>

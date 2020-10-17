@@ -3,12 +3,15 @@ package sample;
 public abstract class Person {
     protected String name;
     protected State StateName;
+    private String stateString; //for the refereeTableView
 
     public Person(String name, State StateName){
         setName(name);
         setStateName(StateName);
+        this.stateString = this.StateName.getName();
     }
 
+public String getStateString(){ return stateString;}
     public String getName(){
         return name;
     }

@@ -12,8 +12,10 @@ public class Model <T>{
     private static ArrayList<State> allStates = new ArrayList<>();
     private static ArrayList<Stadium> allStadiums = new ArrayList<>();
     private static ArrayList<Referee> allReferees = new ArrayList<>();
-    public ObservableList<Athlete> athletelist = FXCollections.observableArrayList();
-    public ObservableList<Referee> refereelist = FXCollections.observableArrayList();
+    public ObservableList<Athlete> athleteList = FXCollections.observableArrayList();
+    public ObservableList<Referee> refereeList = FXCollections.observableArrayList();
+    public ObservableList<Athlete> tournametAthleteList = FXCollections.observableArrayList();
+    public ObservableList<State> tournametStateList = FXCollections.observableArrayList();
     private ArrayList<Tournament> allTournaments = new ArrayList<>();
     private T t;
 
@@ -39,6 +41,22 @@ public class Model <T>{
 
         allTournaments.add(new Tournament<T>(sportTypeOfTournament, stadium, referee, list));
         return eDialogMassage.SUCCESS;
+    }
+
+    public Stadium getStadiumByName(String stadiumName){
+        for (Stadium i : allStadiums){
+            if (i.getName().equals(stadiumName))
+                return i;
+        }
+        return null;
+    }
+
+    public Referee getRefereeByName(String refereeName){
+        for (Referee i : allReferees){
+            if (i.getName().equals(refereeName))
+                return i;
+        }
+        return null;
     }
     //the next to functions are in case the generics here wont work
     //
