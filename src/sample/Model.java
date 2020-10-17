@@ -12,7 +12,6 @@ public class Model <T>{
     private static ArrayList<State> allStates = new ArrayList<>();
     private static ArrayList<Stadium> allStadiums = new ArrayList<>();
     private static ArrayList<Referee> allReferees = new ArrayList<>();
-    //need to add Array of tournaments
     public ObservableList<Athlete> athletelist = FXCollections.observableArrayList();
     public ObservableList<Referee> refereelist = FXCollections.observableArrayList();
     private ArrayList<Tournament> allTournaments = new ArrayList<>();
@@ -184,7 +183,6 @@ public class Model <T>{
                     podium.add(allStates.get(counter));
                     counter++;
                 }
-
         }
         return podium;
     }

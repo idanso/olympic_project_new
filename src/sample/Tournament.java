@@ -11,16 +11,11 @@ public class Tournament <T>{
     private Stadium stadium;
     private Referee referee;
 
-    public Tournament(SportTypeAthleteANDReferee sportTypeOfTournament, Stadium stadium, Referee referee, T t){
+    public Tournament(SportTypeAthleteANDReferee sportTypeOfTournament, Stadium stadium, Referee referee, ArrayList<T> list){
         this.sportTypeOfTournament = sportTypeOfTournament;
         this.stadium = stadium;
         this.referee = referee;
-        this.t = t;
-    }
-
-    public void addToTournament(T t){
-        if(t instanceof State) allTeams.add((State) t);
-        else if(t instanceof  Person) allAthletes.add((Athlete) t);
+        setTypeOfTournament(list);
     }
 
     public ArrayList<T> getPodium (ArrayList <T> list){ //מחזיר מערך של 3 המקומות הראשונים מהתחרות, כשהראשון הוא מקום ראשון
@@ -34,7 +29,10 @@ public class Tournament <T>{
         }
         return podiumArray;
     }
-
+    public void setTypeOfTournament(ArrayList<T> list){
+        if(t instanceof State)  allTeams = new ArrayList<>();
+        else allAthletes = new ArrayList<>();
+    }
 
     public SportTypeAthleteANDReferee getSportTypeOfTournament() {
         return sportTypeOfTournament;
