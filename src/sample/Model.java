@@ -17,20 +17,27 @@ public class Model <T>{
     private ArrayList<Tournament> allTournaments = new ArrayList<>();
     private T t;
 
-    public eDialogMassage addTournament(SportTypeAthleteANDReferee sportTypeOfTournament, Stadium stadium, Referee referee, ArrayList <T> list){
-        if(t instanceof State){
-            for (Tournament i : allTournaments){
-                if(i.getSportTypeOfTournament().equals(sportTypeOfTournament) && i.getStadium().equals(stadium) && i.getReferee().equals(referee) && i.getAllTeams().equals(list))
-                    return eDialogMassage.IN_SYSTEM;
+    public eDialogMassage addTournament(SportTypeAthleteANDReferee sportTypeOfTournament, Stadium stadium, Referee referee, ArrayList <T> list) {
+        for (Tournament i : allTournaments) {
+            boolean isEqualTypeOfTournament = i.getSportTypeOfTournament().equals(sportTypeOfTournament);
+            boolean isEqualStadium = i.getStadium().equals(stadium);
+            boolean isEqualReferee = i.getReferee().equals(referee);
+
+            if (isEqualTypeOfTournament && isEqualStadium && isEqualReferee) {
+
+                if (t instanceof State) {
+                    if (i.getAllTeams().equals(list)) {
+                        return eDialogMassage.IN_SYSTEM;
+                    }
+                } else {
+                    if (i.getAllAthletes().equals(list)) {
+                        return eDialogMassage.IN_SYSTEM;
+                    }
+                }
             }
         }
-        else{
-            for (Tournament i : allTournaments){
-                if(i.getSportTypeOfTournament().equals(sportTypeOfTournament) && i.getStadium().equals(stadium) && i.getReferee().equals(referee) && i.getAllAthletes().equals(list))
-                    return eDialogMassage.IN_SYSTEM;
-            }
-        }
-        allTournaments.add(new Tournament(sportTypeOfTournament,stadium,referee,list));
+
+        allTournaments.add(new Tournament<T>(sportTypeOfTournament, stadium, referee, list));
         return eDialogMassage.SUCCESS;
     }
     //the next to functions are in case the generics here wont work
