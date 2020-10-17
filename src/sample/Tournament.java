@@ -20,8 +20,6 @@ public class Tournament <T>{
     }
 
     public void getPodiumAndUpdateTheWinners (ArrayList <T> list) { //מחזיר מערך של 3 המקומות הראשונים מהתחרות, כשהראשון הוא מקום ראשון
-        //ArrayList <T> copyArray = new ArrayList<T>(list);//העתק של המערך שמקבלים
-        //Random randomNumber = new Random();
         ArrayList<T> podiumArray = new ArrayList<T>();
         int counter = 0;
         while (counter < 3) {
@@ -49,9 +47,7 @@ public class Tournament <T>{
     public SportTypeAthleteANDReferee getSportTypeOfTournament() {
         return sportTypeOfTournament;
     }
-    public Stadium getStadium() {
-        return stadium;
-    }
+    public Stadium getStadium() { return stadium;}
     public Referee getReferee(){
         return referee;
     }
@@ -74,7 +70,6 @@ public class Tournament <T>{
     public void setStadium(Stadium stadium) {
         this.stadium = stadium;
     }
-
 
     @Override
     public boolean equals(Object other) {

@@ -100,14 +100,6 @@ public class EditController implements Initializable {
     @FXML
     private TableView tournamentAthletesTapbleView;
 
-    @FXML
-    private Button tournamentAddButton;
-
-    @FXML
-    private Label country1RedLabel;
-    private TableColumn TableColumn;
-
-
     public void sceneSwitchEvent (ActionEvent event) throws IOException {
         Parent root;
         Stage stage;

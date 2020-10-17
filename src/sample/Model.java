@@ -2,7 +2,6 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -56,25 +55,7 @@ public class Model <T>{
         }
         return null;
     }
-    //the next to functions are in case the generics here wont work
-    //
-   /* public eDialogMassage addTournamentTeams (SportTypeAthleteANDReferee sportTypeOfTournament, Stadium stadium, Referee referee, ArrayList<State> allTeams){// tournament of teams
-        for (Tournament i : allTournaments){
-            if(i.getSportTypeOfTournament().equals(sportTypeOfTournament) && i.getStadium().equals(stadium) && i.getReferee().equals(referee) && i.getAllTeams().equals(allTeams))
-                return eDialogMassage.IN_SYSTEM;
-        }
-        allTournaments.add(new Tournament(sportTypeOfTournament,stadium,referee,allTeams));
-        return eDialogMassage.SUCCESS;
-    }
 
-    public eDialogMassage addTournamentPersonal(SportTypeAthleteANDReferee sportTypeOfTournament, Stadium stadium, Referee referee, ArrayList<Athlete> allAthletes){
-        for (Tournament i : allTournaments){
-            if(i.getSportTypeOfTournament().equals(sportTypeOfTournament) && i.getStadium().equals(stadium) && i.getReferee().equals(referee) && i.getAllTeams().equals(allAthletes))
-                return eDialogMassage.IN_SYSTEM;
-        }
-        allTournaments.add(new Tournament(sportTypeOfTournament,stadium,referee,allAthletes));
-        return eDialogMassage.SUCCESS;
-    }*/
     public eDialogMassage addstadium(String name, String location, int numberOfSeats){
         for (Stadium i : allStadiums){
             if(i.equals(name))

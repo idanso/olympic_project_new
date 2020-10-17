@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="390.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<VBox prefHeight="390.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SampleController">
     <children>
         <HBox>
             <children>
@@ -31,10 +31,10 @@
                                     <content>
                                         <TableView fx:id="tournamentsTableView" prefHeight="311.0" prefWidth="583.0">
                                             <columns>
-                                                <TableColumn fx:id="tournamentTypeCol" prefWidth="81.6666488647461" text="solo/group" />
-                                                <TableColumn fx:id="tornamentParticipentsCol" prefWidth="223.6666717529297" text="participents" />
-                                                <TableColumn fx:id="tornamentRefereeCol" prefWidth="128.99996948242188" text="rederee" />
-                                                <TableColumn fx:id="tornamentLocationCol" prefWidth="148.33331298828125" text="location" />
+                                                <TableColumn fx:id="tournamentTypeCol" prefWidth="81" text="solo/group" />
+                                                <TableColumn fx:id="tornamentParticipentsCol" prefWidth="224" text="participents" />
+                                                <TableColumn fx:id="tornamentRefereeCol" prefWidth="129" text="rederee" />
+                                                <TableColumn fx:id="tornamentLocationCol" prefWidth="148" text="location" />
                                             </columns>
                                         </TableView>
                                     </content>
@@ -77,9 +77,9 @@
                                             <content>
                                                 <TableView fx:id="refereeTableView" prefHeight="311.0" prefWidth="583.0">
                                                     <columns>
-                                                        <TableColumn fx:id="refereeNameCol" prefWidth="192.33332061767578" text="full name" />
-                                                        <TableColumn fx:id="refereeCountryCol" prefWidth="192.33332061767578" text="country" />
-                                                        <TableColumn fx:id="refereeTypecol" prefWidth="189.66659545898438" text="sport type" />
+                                                        <TableColumn fx:id="refereeNameCol" prefWidth="192." text="full name" />
+                                                        <TableColumn fx:id="refereeCountryCol" prefWidth="192" text="country" />
+                                                        <TableColumn fx:id="refereeTypecol" prefWidth="197" text="sport type" />
                                                     </columns>
                                                 </TableView>
                                             </content>
@@ -101,20 +101,38 @@
                                             <font>
                                                 <Font size="18.0" />
                                             </font></Label>
-                                        <Label fx:id="countryFirstLable" layoutX="189.0" layoutY="61.0" />
-                                        <Label fx:id="numOfMedalsFirstLable" layoutX="461.0" layoutY="61.0" />
+                                        <Label fx:id="countryFirstLable" layoutX="234.0" layoutY="61.0" prefHeight="20.0" prefWidth="0.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
+                                        <Label fx:id="numOfMedalsFirstLable" layoutX="461.0" layoutY="61.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
                                         <Label layoutX="161.0" layoutY="120.0" text="second place" underline="true">
                                             <font>
                                                 <Font size="18.0" />
                                             </font></Label>
-                                        <Label fx:id="countrySecondLable" layoutX="69.0" layoutY="179.0" />
-                                        <Label fx:id="numOfMedalsSecondLable" layoutX="262.0" layoutY="179.0" />
+                                        <Label fx:id="countrySecondLable" layoutX="69.0" layoutY="179.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
+                                        <Label fx:id="numOfMedalsSecondLable" layoutX="262.0" layoutY="179.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
                                         <Label layoutX="509.0" layoutY="120.0" text="third place" underline="true">
                                             <font>
                                                 <Font size="18.0" />
                                             </font></Label>
-                                        <Label fx:id="countryThirdLable" layoutX="405.0" layoutY="179.0" />
-                                        <Label fx:id="numOfMedalsThirdLable" layoutX="593.0" layoutY="179.0" />
+                                        <Label fx:id="countryThirdLable" layoutX="405.0" layoutY="179.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
+                                        <Label fx:id="numOfMedalsThirdLable" layoutX="593.0" layoutY="179.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
                               <Label layoutY="301.0" prefHeight="17.0" prefWidth="712.0" text="*the podium is calculated by converting all the medal into points (first place - 3 points , second place 2 points...) and summarize them" />
                                     </children>
                                 </Pane>
