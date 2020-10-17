@@ -6,7 +6,7 @@ import java.util.Random;
 public class Tournament <T>{
     private T t;//הטייפ שאנחנו מקבלים
     private ArrayList<State> allTeams;//רשימת המדינות שמתחרות בתחרות אם היא תחרות נבחרות
-    private ArrayList<Person> allAthletes;//רשימת כל הספורטאים שמתחרים אם התחרות היא אישית
+    private ArrayList<Athlete> allAthletes;//רשימת כל הספורטאים שמתחרים אם התחרות היא אישית
     private SportTypeAthleteANDReferee sportTypeOfTournament;
     private Stadium stadium;
     private Referee referee;
@@ -20,7 +20,7 @@ public class Tournament <T>{
 
     public void addToTournament(T t){
         if(t instanceof State) allTeams.add((State) t);
-        else if(t instanceof  Person) allAthletes.add((Person) t);
+        else if(t instanceof  Person) allAthletes.add((Athlete) t);
     }
 
     public ArrayList<T> getPodium (ArrayList <T> list){ //מחזיר מערך של 3 המקומות הראשונים מהתחרות, כשהראשון הוא מקום ראשון
@@ -41,6 +41,15 @@ public class Tournament <T>{
     }
     public Stadium getStadium() {
         return stadium;
+    }
+    public Referee getReferee(){
+        return referee;
+    }
+    public ArrayList<State> getAllTeams(){
+        return allTeams;
+    }
+    public ArrayList<Athlete> getAllAthletes(){
+        return allAthletes;
     }
 
 

@@ -27,7 +27,7 @@ public class Model <T>{
         }
         else{
             for (Tournament i : allTournaments){
-                if(i.getSportTypeOfTournament().equals(sportTypeOfTournament) && i.getStadium().equals(stadium) && i.getReferee().equals(referee) && i.getAllTeams().equals(list))
+                if(i.getSportTypeOfTournament().equals(sportTypeOfTournament) && i.getStadium().equals(stadium) && i.getReferee().equals(referee) && i.getAllAthletes().equals(list))
                     return eDialogMassage.IN_SYSTEM;
             }
         }
