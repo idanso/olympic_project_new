@@ -88,6 +88,7 @@
                           </content>
                         </ScrollPane>
                         <Button fx:id="tournamentAddButton" layoutX="658.0" layoutY="43.0" mnemonicParsing="false" onAction="#toutnamentAddToTableView" prefHeight="25.0" prefWidth="57.0" text="Add" />
+                        <Label fx:id="tournametTableViewRedLabel" layoutX="279.0" layoutY="307.0" text="*the table must be fill with at least 3 cometitors" textFill="RED" />
                             </children></AnchorPane>
                     </content>
                 </Tab>

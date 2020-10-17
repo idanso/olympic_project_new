@@ -95,6 +95,9 @@ public class EditController implements Initializable {
     private Label tournamentAthleteLabel;
 
     @FXML
+    private Label tournametTableViewRedLabel;;
+
+    @FXML
     private TableView tournamentAthletesTapbleView;
 
     @FXML
@@ -210,8 +213,9 @@ public class EditController implements Initializable {
         String athlete1 = athleteBox1.getValue();
         String referee = refereeBox.getValue();
         String stadium = stadiumBox.getValue();
-        if (strTournamentType != null && sportType != null && !model.tournametAthleteList.isEmpty() &&
-                referee != null && stadium != null){
+        if (strTournamentType != null && sportType != null && (!model.tournametAthleteList.isEmpty() || !model.tournametStateList.isEmpty()) &&
+                referee != null && stadium != null && (tournamentAthletesTapbleView.getItems().size() >= 3)){
+            tournametTableViewRedLabel.setVisible(false);
             if (strTournamentType.equals("solo")) {
                 dialogMassage(model.addTournament(sportType,model.getStadiumByName(stadium), model.getRefereeByName(referee),new ArrayList<Athlete> (model.tournametAthleteList)));
             }
@@ -228,8 +232,10 @@ public class EditController implements Initializable {
         model.tournametAthleteList.clear();
         model.tournametStateList.clear();
         }
-        else
+        else{
             dialogMassage(eDialogMassage.EMPTY);
+            tournametTableViewRedLabel.setVisible(true);
+        }
     }
 
     public void tornamenBoxFill (ActionEvent e){
@@ -242,7 +248,7 @@ public class EditController implements Initializable {
         }
         String strTournamentType = tournamentType.getValue();
         if(!e.getSource().equals(countryBox)) {
-            if (strTournamentType.equals("solo")) {
+            if (strTournamentType != null && strTournamentType.equals("solo")) {
                 athleteBox1.setVisible(true);
                 tournamentAthleteLabel.setVisible(true);
                 tournamentAthletesTapbleView.getColumns().clear();
@@ -342,6 +348,7 @@ public class EditController implements Initializable {
         stadiumBox.getItems().addAll(model.getStadiumString());
         athleteBox1.setVisible(false);
         tournamentAthleteLabel.setVisible(false);
+        tournametTableViewRedLabel.setVisible(false);
 
 
     }
