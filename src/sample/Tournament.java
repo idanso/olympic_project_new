@@ -1,6 +1,7 @@
 package sample;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Random;
 
 public class Tournament <T>{
@@ -18,21 +19,31 @@ public class Tournament <T>{
         setTypeOfTournament(list);
     }
 
-    public void getPodiumAndUpdateTheWinners (ArrayList <T> list){ //מחזיר מערך של 3 המקומות הראשונים מהתחרות, כשהראשון הוא מקום ראשון
-        ArrayList <T> copyArray = new ArrayList<T>(list);//העתק של המערך שמקבלים
-        Random randomNumber = new Random();
-        ArrayList <T> podiumArray = new ArrayList<T>();
-        for (int i=1 ; i<=3 ; i++) {
-            int number = randomNumber.nextInt(copyArray.size());
-            podiumArray.add(list.get(number));
-            if(t instanceof State) ((State) podiumArray.get(i - 1)).addMedal(i);
-            else if(t instanceof Athlete) ((Athlete) podiumArray.get(i - 1)).addMedal(i);
-            copyArray.remove(number);//מוחק את מי שנבחר בהגרלה מהמערך הרזרבי שיצרתי בהתחלה ןלא מהמקורי
+    public void getPodiumAndUpdateTheWinners (ArrayList <T> list) { //מחזיר מערך של 3 המקומות הראשונים מהתחרות, כשהראשון הוא מקום ראשון
+        //ArrayList <T> copyArray = new ArrayList<T>(list);//העתק של המערך שמקבלים
+        //Random randomNumber = new Random();
+        ArrayList<T> podiumArray = new ArrayList<T>();
+        int counter = 0;
+        while (counter < 3) {
+            int number = (int)( Math.random() * (list.size()));
+            System.out.println(Math.random() * (list.size()));
+            System.out.println((int)(Math.random() * (list.size())));
+            System.out.println(number);
+            if (!podiumArray.contains(list.get(number))) {
+                podiumArray.add(list.get(number));
+                if (list.get(0) instanceof State)
+                    ((State) podiumArray.get(counter)).addMedal(counter + 1);
+                else if (list.get(0) instanceof Athlete)
+                    ((Athlete) podiumArray.get(counter)).addMedal(counter + 1);
+                counter++;
+            }
         }
     }
     public void setTypeOfTournament(ArrayList<T> list){
-        if(t instanceof State)  allTeams = new ArrayList<>();
-        else allAthletes = new ArrayList<>();
+        if(t instanceof State)
+            allTeams = new ArrayList<State>((ArrayList<State>)list);
+        else
+            allAthletes = new ArrayList<>((ArrayList<Athlete>)list);
     }
 
     public SportTypeAthleteANDReferee getSportTypeOfTournament() {

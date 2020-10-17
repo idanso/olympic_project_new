@@ -212,11 +212,21 @@ public class EditController implements Initializable {
         String stadium = stadiumBox.getValue();
         if (strTournamentType != null && sportType != null && !model.tournametAthleteList.isEmpty() &&
                 referee != null && stadium != null){
-            if (tournamentType.equals("solo")) {
-                model.addTournament(sportType,model.getStadiumByName(stadium), model.getRefereeByName(referee), (ArrayList)model.tournametAthleteList);
+            if (strTournamentType.equals("solo")) {
+                dialogMassage(model.addTournament(sportType,model.getStadiumByName(stadium), model.getRefereeByName(referee),new ArrayList<Athlete> (model.tournametAthleteList)));
             }
             else
-                model.addTournament(sportType,model.getStadiumByName(stadium), model.getRefereeByName(referee), (ArrayList)model.tournametStateList);
+                model.addTournament(sportType,model.getStadiumByName(stadium), model.getRefereeByName(referee), new ArrayList<State> (model.tournametStateList));
+
+        refereeBox.getSelectionModel().clearSelection();
+        athleteBox1.getSelectionModel().clearSelection();
+        countryBox.getSelectionModel().clearSelection();
+        stadiumBox.getSelectionModel().clearSelection();
+        tournamentType.getSelectionModel().clearSelection();
+        sportTypeBox1.getSelectionModel().clearSelection();
+        tournamentAthletesTapbleView.getColumns().clear();
+        model.tournametAthleteList.clear();
+        model.tournametStateList.clear();
         }
         else
             dialogMassage(eDialogMassage.EMPTY);
