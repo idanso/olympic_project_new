@@ -278,33 +278,31 @@ public class EditController implements Initializable {
     }
 
     public void toutnamentAddToTableView(ActionEvent e){
-        if (tournamentType.getValue().equals("solo")){
-            String country = countryBox.getValue();
-            String athlete = athleteBox1.getValue();
-            if (country != null && athlete != null) {
-                if (!model.tournametAthleteList.contains(model.getStateByName(country).getAthleteByName(athlete))) {
-                    model.tournametAthleteList.add(model.getStateByName(country).getAthleteByName(athlete));
-                    ((TableColumn)tournamentAthletesTapbleView.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<Athlete, String>("name"));
-                    ((TableColumn)tournamentAthletesTapbleView.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<Athlete, String>("stateString"));
-                    ((TableColumn)tournamentAthletesTapbleView.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<Athlete, SportTypeAthleteANDReferee>("sportType"));
-                    tournamentAthletesTapbleView.setItems(model.tournametAthleteList);
-                } else dialogMassage(eDialogMassage.IN_SYSTEM);
-            } else dialogMassage(eDialogMassage.EMPTY);
+        if (tournamentType.getValue() != null && sportTypeBox1.getValue() != null) {
+            if (tournamentType.getValue().equals("solo")) {
+                String country = countryBox.getValue();
+                String athlete = athleteBox1.getValue();
+                if (country != null && athlete != null) {
+                    if (!model.tournametAthleteList.contains(model.getStateByName(country).getAthleteByName(athlete))) {
+                        model.tournametAthleteList.add(model.getStateByName(country).getAthleteByName(athlete));
+                        ((TableColumn) tournamentAthletesTapbleView.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<Athlete, String>("name"));
+                        ((TableColumn) tournamentAthletesTapbleView.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<Athlete, String>("stateString"));
+                        ((TableColumn) tournamentAthletesTapbleView.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<Athlete, SportTypeAthleteANDReferee>("sportType"));
+                        tournamentAthletesTapbleView.setItems(model.tournametAthleteList);
+                    } else dialogMassage(eDialogMassage.IN_SYSTEM);
+                } else dialogMassage(eDialogMassage.EMPTY);
+            } else {
+                String country = countryBox.getValue();
+                if (country != null) {
+                    if (!model.tournametStateList.contains(model.getStateByName(country))) {
+                        model.tournametStateList.add(model.getStateByName(country));
+                        ((TableColumn) tournamentAthletesTapbleView.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<State, String>("name"));
+                        tournamentAthletesTapbleView.setItems(model.tournametStateList);
+                    } else dialogMassage(eDialogMassage.IN_SYSTEM);
+                } else dialogMassage(eDialogMassage.EMPTY);
+            }
         }
-        else {
-            String country = countryBox.getValue();
-            if (country != null){
-                if (!model.tournametStateList.contains(model.getStateByName(country))) {
-                    model.tournametStateList.add(model.getStateByName(country));
-                    ((TableColumn)tournamentAthletesTapbleView.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<State, String>("name"));
-                    tournamentAthletesTapbleView.setItems(model.tournametStateList);
-                }else dialogMassage(eDialogMassage.IN_SYSTEM);
-            }else dialogMassage(eDialogMassage.EMPTY);
-
-
-
-        }
-
+        else dialogMassage(eDialogMassage.EMPTY);
     }
 
     public void addRefereeBtn (ActionEvent e){
