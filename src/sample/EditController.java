@@ -212,7 +212,7 @@ public class EditController implements Initializable {
                 dialogMassage(model.addTournament(sportType,model.getStadiumByName(stadium), model.getRefereeByName(referee),new ArrayList<Athlete> (model.tournametAthleteList)));
             }
             else
-                model.addTournament(sportType,model.getStadiumByName(stadium), model.getRefereeByName(referee), new ArrayList<State> (model.tournametStateList));
+                dialogMassage(model.addTournament(sportType,model.getStadiumByName(stadium), model.getRefereeByName(referee), new ArrayList<State> (model.tournametStateList)));
 
         refereeBox.getSelectionModel().clearSelection();
         athleteBox1.getSelectionModel().clearSelection();

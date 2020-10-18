@@ -7,7 +7,6 @@ import java.util.Collections;
 
 public class Model <T>{
 
-    public Referee getAllReferees;
     private static ArrayList<State> allStates = new ArrayList<>();
     private static ArrayList<Stadium> allStadiums = new ArrayList<>();
     private static ArrayList<Referee> allReferees = new ArrayList<>();
@@ -112,9 +111,10 @@ public class Model <T>{
         for (State i : allStates) {
             if (i.getAthleteByName(name) != null) {
                 i.deletePlayer(name);
+                return eDialogMassage.DELETE_SUCCESS;
             }
         }
-        return eDialogMassage.DELETE_SUCCESS;
+        return eDialogMassage.FAILED;
     }
     public ArrayList<String> getAllStateString (){
         ArrayList<String> str = new ArrayList<>();
@@ -133,13 +133,21 @@ public class Model <T>{
         return str;
     }
 
-    public ArrayList<String> getAllRefereesString (){
-        ArrayList<String> str = new ArrayList<>();
-        for (Referee i : allReferees){
-            str.add(i.getName());
+    public ArrayList<State> getStatesBysportType(SportTypeAthleteANDReferee sportType){
+        ArrayList<State> states = new ArrayList<>();
+        for (State i : allStates){
+            if(sportType.equals(SportTypeAthleteANDReferee.Runner)) {
+                if (!i.getAllTheRunners().isEmpty())
+                    states.add(i);
+            }
+            else{
+                if (!i.getAllTheJumpers().isEmpty())
+                    states.add(i);
+            }
         }
-        return str;
+        return states;
     }
+
     public ArrayList<String> getRefereesBySportTypeString (SportTypeAthleteANDReferee sportType){
         ArrayList<String> str = new ArrayList<>();
         for (Referee i : allReferees){

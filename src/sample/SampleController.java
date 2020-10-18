@@ -23,9 +23,6 @@ public class SampleController implements Initializable {
     private Button changeTomanagerPage;
 
     @FXML
-    private MenuButton tournamentMenu;
-
-    @FXML
     private ChoiceBox<String> countryBox2;
 
     @FXML
@@ -82,8 +79,6 @@ public class SampleController implements Initializable {
         refereeCountryCol.setCellValueFactory((new PropertyValueFactory<Referee,String>("stateString")));
         refereeTypecol.setCellValueFactory(new PropertyValueFactory<Referee, SportTypeAthleteANDReferee>("sportType"));
         refereeTableView.setItems(model.refereeList);
-
-
     }
 
     public void sceneSwitchEvent (ActionEvent event) throws IOException {
@@ -99,7 +94,6 @@ public class SampleController implements Initializable {
     public void addItemsToMenu(){
         countryBox2.getItems().clear();
         countryBox2.getItems().addAll(model.getAllStatesWithAthletes());
-
     }
 
     public void updateMedalView (){
@@ -111,14 +105,11 @@ public class SampleController implements Initializable {
             numOfMedalsSecondLable.setText("Points: " + podiumCountrys.get(1).getTotalPoints());
             countryThirdLable.setText(podiumCountrys.get(2).getName());
             numOfMedalsThirdLable.setText("Points: " + podiumCountrys.get(2).getTotalPoints());
-            ///need to add style
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList <MenuItem> menulistArray = new ArrayList<>();
-        tournamentMenu.getItems().addAll(menulistArray);
         addItemsToMenu();
         refereeTableViewUpdate();
         countryBox2.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
@@ -127,6 +118,5 @@ public class SampleController implements Initializable {
                 athleteTableViewUpdate(countryBox2.getItems().get((Integer)t1));
             }
         });
-
     }
 }
