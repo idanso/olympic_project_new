@@ -11,7 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -154,7 +153,6 @@ public class EditController implements Initializable {
         int numOfSeats = 0;
         name = stadiumNameInput.getText();
         location = stadiumLocationInput.getText();
-
         try {
             numOfSeats = Integer.valueOf(stadiumSeatsInput.getText());
             if (numOfSeats == 0)
@@ -181,6 +179,7 @@ public class EditController implements Initializable {
         }
 
     }
+
     public void emptyFieldsRedMassage(MouseEvent e){
         String str1TournamentType = tournamentType.getValue();
         SportTypeAthleteANDReferee sportType1 = sportTypeBox1.getValue();
@@ -196,8 +195,8 @@ public class EditController implements Initializable {
             countryRedLabel.setText("required field first");
             countryRedLabel.setTextFill(Paint.valueOf("red"));
         }
-
     }
+
     public void addTournamenBtn(ActionEvent e){
         String strTournamentType = tournamentType.getValue();
         SportTypeAthleteANDReferee sportType = sportTypeBox1.getValue();
@@ -339,8 +338,6 @@ public class EditController implements Initializable {
         athleteBox1.setVisible(false);
         tournamentAthleteLabel.setVisible(false);
         tournametTableViewRedLabel.setVisible(false);
-
-
     }
 
     public void dialogMassage(eDialogMassage massage ){
@@ -354,8 +351,8 @@ public class EditController implements Initializable {
             alert.setHeaderText("added success!");
         else if(massage == eDialogMassage.IN_SYSTEM)
             alert.setHeaderText("not added, already exist in the system");
+        else if(massage == eDialogMassage.DELETE_SUCCESS)
+            alert.setHeaderText("athlete delete from system");
         alert.showAndWait();
-
     }
-
 }

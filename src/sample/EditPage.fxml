@@ -88,7 +88,7 @@
                           </content>
                         </ScrollPane>
                         <Button fx:id="tournamentAddButton" layoutX="658.0" layoutY="43.0" mnemonicParsing="false" onAction="#toutnamentAddToTableView" prefHeight="25.0" prefWidth="57.0" text="Add" />
-                        <Label fx:id="tournametTableViewRedLabel" layoutX="279.0" layoutY="307.0" text="*the table must be fill with at least 3 cometitors" textFill="RED" />
+                        <Label fx:id="tournametTableViewRedLabel" layoutX="279.0" layoutY="307.0" text="*the table must be fill with at least 3 competitors" textFill="RED" />
                             </children></AnchorPane>
                     </content>
                 </Tab>
@@ -101,7 +101,7 @@
                                         <Label layoutX="31.0" layoutY="115.0" text="name:" />
                                         <Label layoutX="243.0" layoutY="24.0" text="Adding Stadium To System " underline="true">
                                             <font>
-                                                <Font size="18.0" />
+                                                <Font name="System Bold" size="23.0" />
                                             </font></Label>
                                         <Label layoutX="253.0" layoutY="115.0" text="location:" />
                                         <Label layoutX="491.0" layoutY="115.0" text="number of seat:s" />
