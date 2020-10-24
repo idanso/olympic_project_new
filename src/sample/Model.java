@@ -148,6 +148,21 @@ public class Model <T>{
         return states;
     }
 
+    public ArrayList<String> getStatesBysportTypeString(SportTypeAthleteANDReferee sportType){
+        ArrayList<String> states = new ArrayList<>();
+        for (State i : allStates){
+            if(sportType.equals(SportTypeAthleteANDReferee.Runner)) {
+                if (!i.getAllTheRunners().isEmpty())
+                    states.add(i.getName());
+            }
+            else{
+                if (!i.getAllTheJumpers().isEmpty())
+                    states.add(i.getName());
+            }
+        }
+        return states;
+    }
+
     public ArrayList<String> getRefereesBySportTypeString (SportTypeAthleteANDReferee sportType){
         ArrayList<String> str = new ArrayList<>();
         for (Referee i : allReferees){
@@ -189,12 +204,15 @@ public class Model <T>{
         ArrayList<State> podium = new ArrayList<>();
         if(getAllStatesWithAthletes().size() >= 3){
             Collections.sort(allStates, new SortByMedal());
-            int counter = 0;
-            while(counter < 3)
-                if(!allStates.get(counter).getAthletes().isEmpty()) {
-                    podium.add(allStates.get(counter));
+            int counter = 0,counter2 = 0;
+            while(counter < 3) {
+                if (!getStateByName(getAllStatesWithAthletes().get(counter2)).getAthletes().isEmpty()) {
+                    podium.add(allStates.get(counter2));
                     counter++;
                 }
+                counter2++;
+            }
+
         }
         return podium;
     }

@@ -109,23 +109,16 @@ public class EditController implements Initializable {
         stage.show();
     }
 
-    public void addItemsToMenu(){
-        countryBox.getItems().clear();
-        countryBox.getItems().addAll(model.getAllStatesWithAthletes());
-    }
-
     public void editAthleteBtnsEvent (ActionEvent e) {
         String fullName;
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("status massage");
+        String country;
         try {
             if (e.getSource() == athleteSubmitBtn) {
                 fullName = fullNameRegisterInput.getText();
-                SportTypeAthleteANDReferee athleteSportType = (SportTypeAthleteANDReferee)sportTypeBox.getValue();
-                String country = countryInput.getText();
-                if (!fullName.isEmpty() && athleteSportType != null && country != null) {
+                SportTypeAthleteANDReferee athleteSportType = sportTypeBox.getValue();
+                country = countryInput.getText();
+                if (!fullName.isEmpty() && athleteSportType != null && !country.isEmpty()) {
                     dialogMassage(model.addAthlete(fullName,country,athleteSportType));
-                    addItemsToMenu();
                     fullNameRegisterInput.clear();
                     sportTypeBox.getSelectionModel().clearSelection();
                     countryInput.clear();
@@ -134,7 +127,6 @@ public class EditController implements Initializable {
 
             } else if (e.getSource() == athleteDeleteBtn) {
                 fullName = fullNameDeleteInput.getText();
-                System.out.println(fullName);
                 if (!fullName.isEmpty()) {
                     dialogMassage(model.deleteAthlete(fullName));
                     fullNameDeleteInput.clear();
@@ -200,8 +192,6 @@ public class EditController implements Initializable {
     public void addTournamenBtn(ActionEvent e){
         String strTournamentType = tournamentType.getValue();
         SportTypeAthleteANDReferee sportType = sportTypeBox1.getValue();
-        String country = countryBox.getValue();
-        String athlete1 = athleteBox1.getValue();
         String referee = refereeBox.getValue();
         String stadium = stadiumBox.getValue();
         if (strTournamentType != null && sportType != null && (!model.tournametAthleteList.isEmpty() || !model.tournametStateList.isEmpty()) &&
@@ -262,6 +252,10 @@ public class EditController implements Initializable {
             tournamentRedLabel.setText("");
         if(sportType != null && strTournamentType != null){
             if(!e.getSource().equals(countryBox)) {
+                countryBox.getItems().clear();
+                countryBox.getItems().addAll(model.getStatesBysportTypeString(sportType));
+            }
+            if(!e.getSource().equals(countryBox)) {
                 refereeBox.getItems().clear();
                 refereeBox.getItems().addAll(model.getRefereesBySportTypeString(sportType));
             }
@@ -313,7 +307,6 @@ public class EditController implements Initializable {
             refereeFullNameInput.clear();
             refereeCountryInput.clear();
             sportTypeBox2.getSelectionModel().clearSelection();
-            addItemsToMenu();
         }
         else{
             dialogMassage(eDialogMassage.EMPTY);
@@ -329,7 +322,6 @@ public class EditController implements Initializable {
         sportTypeBox1.getItems().clear();
         sportTypeBox2.getItems().clear();
         stadiumBox.getItems().clear();
-        addItemsToMenu();
         tournamentType.getItems().addAll("solo", "team");
         sportTypeBox.getItems().addAll(SportTypeAthleteANDReferee.values());
         sportTypeBox1.getItems().addAll(SportTypeAthleteANDReferee.getAllSportTypes());

@@ -24,9 +24,6 @@ public class Tournament <T>{
         int counter = 0;
         while (counter < 3) {
             int number = (int)( Math.random() * (list.size()));
-            System.out.println(Math.random() * (list.size()));
-            System.out.println((int)(Math.random() * (list.size())));
-            System.out.println(number);
             if (!podiumArray.contains(list.get(number))) {
                 podiumArray.add(list.get(number));
                 if (list.get(0) instanceof State)

@@ -42,7 +42,6 @@ public class State{
 
     public void addMedal(int place) {//מוסיף מדלייה לאוסף של המדינה
         this.finalPlaceAtTheTournament.add(place);
-
     }
 
     public void addPlayer(Athlete athlete){
@@ -63,13 +62,13 @@ public class State{
     public int getTotalPoints(){
         int totalPoints = 0;
         for(int i =0 ; i< finalPlaceAtTheTournament.size() ; i++){
-            if(finalPlaceAtTheTournament.get(i) == 1) totalPoints =+3;
-            else {
-                if (finalPlaceAtTheTournament.get(i) == 2) totalPoints =+ 2;
-                else totalPoints =+ 1;
+            if(finalPlaceAtTheTournament.get(i) == 1)
+                totalPoints += 3;
+            else if (finalPlaceAtTheTournament.get(i) == 2)
+                    totalPoints += 2;
+            else totalPoints += 1;
             }
-        }
-         return totalPoints;
+        return totalPoints;
     }
 
     public String getName(){
