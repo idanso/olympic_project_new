@@ -2,6 +2,12 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -10,14 +16,33 @@ public class Model <T>{
     private static ArrayList<State> allStates = new ArrayList<>();
     private static ArrayList<Stadium> allStadiums = new ArrayList<>();
     private static ArrayList<Referee> allReferees = new ArrayList<>();
-    public ObservableList<Athlete> athleteList = FXCollections.observableArrayList();
-    public ObservableList<Referee> refereeList = FXCollections.observableArrayList();
+    public ObservableList<Athlete> athleteList = FXCollections.observableArrayList();//athlete list for the tableView of the "athlete view" tab
+    public ObservableList<Referee> refereeList = FXCollections.observableArrayList();//referee list for the tableView of the "referee view" tab
     public ObservableList<Athlete> tournametAthleteList = FXCollections.observableArrayList();
     public ObservableList<State> tournametStateList = FXCollections.observableArrayList();
     private ArrayList<Tournament> allTournaments = new ArrayList<>();
     private T t;
 
-    public eDialogMassage addTournament(SportTypeAthleteANDReferee sportTypeOfTournament, Stadium stadium, Referee referee, ArrayList <T> list) {
+
+    public void switchScenes (Button btn) {//switching between the scenes
+        Parent root;
+        Stage stage;
+        stage = (Stage) btn.getScene().getWindow();
+        try {
+            if (btn.getId().equals("changeTomanagerPage")) {
+                root = FXMLLoader.load(getClass().getResource("EditPage.fxml"));
+            } else
+                root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+    }
+    public eDialogMassage addTournament(SportTypeAthleteANDReferee sportTypeOfTournament, Stadium stadium, Referee referee, ArrayList <T> list) {//creating new tournament and adding it to the allTournaments array
         for (Tournament i : allTournaments) {
             boolean isEqualTypeOfTournament = i.getSportTypeOfTournament().equals(sportTypeOfTournament);
             boolean isEqualStadium = i.getStadium().equals(stadium);
@@ -90,8 +115,7 @@ public class Model <T>{
         return null;
     }
 
-    public eDialogMassage addAthlete (String name, String stateName, SportTypeAthleteANDReferee sportType){
-
+    public eDialogMassage addAthlete (String name, String stateName, SportTypeAthleteANDReferee sportType){//creating athlete and adding it the right state
         State state = stateExistCheck(stateName);
         if(state == null){
             allStates.add(new State(stateName));
@@ -200,7 +224,7 @@ public class Model <T>{
 
     }
 
-    public ArrayList<State> getPodium (){
+    public ArrayList<State> getPodium (){//returning the three first places of the states for the "medal view" tab
         ArrayList<State> podium = new ArrayList<>();
         if(getAllStatesWithAthletes().size() >= 3){
             Collections.sort(allStates, new SortByMedal());
@@ -212,7 +236,6 @@ public class Model <T>{
                 }
                 counter2++;
             }
-
         }
         return podium;
     }

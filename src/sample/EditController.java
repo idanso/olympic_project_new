@@ -2,15 +2,11 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
-import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -99,14 +95,8 @@ public class EditController implements Initializable {
     @FXML
     private TableView tournamentAthletesTapbleView;
 
-    public void sceneSwitchEvent (ActionEvent event) throws IOException {
-        Parent root;
-        Stage stage;
-        stage = (Stage) changeToViewPage.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void sceneSwitchEvent () throws IOException {//button switch to got to the  sample.fxml page
+       model.switchScenes(changeToViewPage);
     }
 
     public void editAthleteBtnsEvent (ActionEvent e) {
@@ -172,7 +162,7 @@ public class EditController implements Initializable {
 
     }
 
-    public void emptyFieldsRedMassage(MouseEvent e){
+    public void emptyFieldsRedMassage(MouseEvent e){//triggered when clicked on a choiceBox who still not initialize cause it depends on other choiceboxes and popping up red massages under the relevant boxesin the "add tournament" tab
         String str1TournamentType = tournamentType.getValue();
         SportTypeAthleteANDReferee sportType1 = sportTypeBox1.getValue();
         if(sportType1 == null) {
@@ -219,7 +209,7 @@ public class EditController implements Initializable {
         }
     }
 
-    public void tornamenBoxFill (ActionEvent e){
+    public void tornamenBoxFill (ActionEvent e){//filling the relevant choiceboxes according the relevant tournament and sport type in the "add tournament" tab
         if (e.getSource().equals(tournamentType) || e.getSource().equals(sportTypeBox1)){
             refereeBox.getSelectionModel().clearSelection();
             countryBox.getSelectionModel().clearSelection();
@@ -270,7 +260,7 @@ public class EditController implements Initializable {
         }
     }
 
-    public void toutnamentAddToTableView(ActionEvent e){
+    public void toutnamentAddToTableView(ActionEvent e){// filling the table view of the athletes/states (depends on the tournament type) when clicked on the add button in the "add tournament" tab
         if (tournamentType.getValue() != null && sportTypeBox1.getValue() != null) {
             if (tournamentType.getValue().equals("solo")) {
                 String country = countryBox.getValue();
@@ -332,7 +322,7 @@ public class EditController implements Initializable {
         tournametTableViewRedLabel.setVisible(false);
     }
 
-    public void dialogMassage(eDialogMassage massage ){
+    public void dialogMassage(eDialogMassage massage ){//getting an edialogMassage from any addButton function and show alert with a right massage
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("status massage");
         if (massage == eDialogMassage.EMPTY)
