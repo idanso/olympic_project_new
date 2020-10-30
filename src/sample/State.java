@@ -49,7 +49,7 @@ public class State{
     }
     public void deletePlayer(String name){
         for (int i=0 ; i<athletes.size() ; i++) {
-            if(athletes.get(i).getName().equals(name))
+            if(athletes.get(i).getName().equalsIgnoreCase(name))
             athletes.remove(i);
         }
     }
@@ -77,7 +77,7 @@ public class State{
 
     public Athlete getAthleteByName(String name){
         for(Athlete i : athletes){
-            if(i.getName().equals(name))
+            if(i.getName().equalsIgnoreCase(name))
                 return i;
 
         }

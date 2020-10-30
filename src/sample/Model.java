@@ -109,7 +109,7 @@ public class Model <T>{
 
     public State stateExistCheck (String stateName ){
         for (State i : allStates){
-            if(i.getName().equals(stateName))
+            if(i.getName().equalsIgnoreCase(stateName))
                 return i;
         }
         return null;
