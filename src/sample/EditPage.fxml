@@ -22,38 +22,6 @@
         </HBox>
         <TabPane fx:id="tapPaneSummery" minHeight="344.0" minWidth="675.0" prefHeight="359.0" prefWidth="723.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="edit athletes">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Pane layoutX="-6.0" layoutY="-4.0" prefHeight="337.0" prefWidth="714.0">
-                                    <children>
-                                        <Label layoutX="26.0" layoutY="66.0" text="full name:" />
-                                        <Label layoutX="52.0" layoutY="120.0" text="type:" />
-                                        <Button fx:id="athleteSubmitBtn" layoutX="107.0" layoutY="225.0" mnemonicParsing="false" onAction="#editAthleteBtnsEvent" text="submit" />
-                                        <Label layoutX="35.0" layoutY="173.0" text="country:" />
-                                        <TextField fx:id="fullNameRegisterInput" layoutX="107.0" layoutY="62.0" />
-                                        <Label layoutX="372.0" layoutY="66.0" text="full name:" />
-                                        <TextField fx:id="fullNameDeleteInput" layoutX="455.0" layoutY="62.0" />
-                                        <Button fx:id="athleteDeleteBtn" layoutX="455.0" layoutY="116.0" mnemonicParsing="false" onAction="#editAthleteBtnsEvent" text="delete athlete" />
-                                        <Label layoutX="86.0" layoutY="14.0" text="adding athlete" textAlignment="CENTER" underline="true">
-                                            <font>
-                                                <Font name="System Bold" size="23.0" />
-                                            </font>
-                                        </Label>
-                                        <Label layoutX="454.0" layoutY="14.0" text="delete athlete" textAlignment="CENTER" underline="true">
-                                            <font>
-                                                <Font name="System Bold" size="23.0" />
-                                            </font>
-                                        </Label>
-                                        <ChoiceBox fx:id="sportTypeBox" layoutX="106.0" layoutY="116.0" prefHeight="25.0" prefWidth="129.0" />
-                                        <TextField fx:id="countryInput" layoutX="107.0" layoutY="169.0" />
-                                    </children>
-                                </Pane>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
                 <Tab text="edit tournaments">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -90,6 +58,38 @@
                         <Button fx:id="tournamentAddButton" layoutX="658.0" layoutY="43.0" mnemonicParsing="false" onAction="#toutnamentAddToTableView" prefHeight="25.0" prefWidth="57.0" text="Add" />
                         <Label fx:id="tournametTableViewRedLabel" layoutX="279.0" layoutY="307.0" text="*the table must be fill with at least 3 competitors" textFill="RED" />
                             </children></AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="edit athletes">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Pane layoutX="-6.0" layoutY="-4.0" prefHeight="337.0" prefWidth="714.0">
+                                    <children>
+                                        <Label layoutX="26.0" layoutY="66.0" text="full name:" />
+                                        <Label layoutX="52.0" layoutY="120.0" text="type:" />
+                                        <Button fx:id="athleteSubmitBtn" layoutX="107.0" layoutY="225.0" mnemonicParsing="false" onAction="#editAthleteBtnsEvent" text="submit" />
+                                        <Label layoutX="35.0" layoutY="173.0" text="country:" />
+                                        <TextField fx:id="fullNameRegisterInput" layoutX="107.0" layoutY="62.0" />
+                                        <Label layoutX="372.0" layoutY="66.0" text="full name:" />
+                                        <TextField fx:id="fullNameDeleteInput" layoutX="455.0" layoutY="62.0" />
+                                        <Button fx:id="athleteDeleteBtn" layoutX="455.0" layoutY="116.0" mnemonicParsing="false" onAction="#editAthleteBtnsEvent" text="delete athlete" />
+                                        <Label layoutX="86.0" layoutY="14.0" text="adding athlete" textAlignment="CENTER" underline="true">
+                                            <font>
+                                                <Font name="System Bold" size="23.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="454.0" layoutY="14.0" text="delete athlete" textAlignment="CENTER" underline="true">
+                                            <font>
+                                                <Font name="System Bold" size="23.0" />
+                                            </font>
+                                        </Label>
+                                        <ChoiceBox fx:id="sportTypeBox" layoutX="106.0" layoutY="116.0" prefHeight="25.0" prefWidth="129.0" />
+                                        <TextField fx:id="countryInput" layoutX="107.0" layoutY="169.0" />
+                                    </children>
+                                </Pane>
+                            </children>
+                        </AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="add stadium">
